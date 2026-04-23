@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#0b1c30",
+            "tertiary-container": "#002201",
+            "surface-bright": "#f8f9ff",
+            "primary-fixed": "#dae2fd",
+            "on-secondary-fixed-variant": "#5e4200",
+            "secondary-fixed-dim": "#ecc070",
+            "secondary": "#795911",
+            "outline-variant": "#c6c6cd",
+            "on-tertiary-fixed": "#002201",
+            "on-secondary-container": "#785810",
+            "on-primary": "#ffffff",
+            "secondary-fixed": "#ffdea6",
+            "on-primary-container": "#7c839b",
+            "on-tertiary-fixed-variant": "#23501e",
+            "surface-variant": "#d3e4fe",
+            "on-error": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#3f465c",
+            "on-tertiary-container": "#609056",
+            "surface": "#f8f9ff",
+            "tertiary-fixed": "#bcf0ae",
+            "inverse-primary": "#bec6e0",
+            "surface-container-low": "#eff4ff",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#fed17f",
+            "surface-container": "#e5eeff",
+            "on-primary-fixed": "#131b2e",
+            "surface-tint": "#565e74",
+            "surface-container-high": "#dce9ff",
+            "tertiary": "#000000",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#d3e4fe",
+            "error": "#ba1a1a",
+            "primary-fixed-dim": "#bec6e0",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#a1d494",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#76777d",
+            "on-surface-variant": "#45464d",
+            "inverse-on-surface": "#eaf1ff",
+            "background": "#f8f9ff",
+            "primary-container": "#131b2e",
+            "on-surface": "#0b1c30",
+            "inverse-surface": "#213145",
+            "primary": "#000000",
+            "surface-dim": "#cbdbf5",
+            "on-secondary-fixed": "#271900"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "base": "8px",
+            "section-gap": "80px",
+            "stack-lg": "32px",
+            "margin": "32px",
+            "container-max": "1280px",
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "gutter": "24px"
+          },
+          fontFamily: {
+            "body-lg": ["Manrope"],
+            "label-md": ["Manrope"],
+            "body-md": ["Manrope"],
+            "headline-xl": ["Manrope"],
+            "headline-md": ["Manrope"],
+            "headline-lg": ["Manrope"]
+          },
+          fontSize: {
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .hero-gradient {
+      background: linear-gradient(rgba(11, 28, 48, 0.72), rgba(11, 28, 48, 0.72));
+    }
+
+    #cursor-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: black;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.18);
+    }
+
+    #cursor-trail-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .trail-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: trailFade 0.45s ease-out forwards;
+    }
+
+    @keyframes trailFade {
+      0% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Blog - KJS Township</title>
+</head>
+
+<body class="bg-background font-body-md text-on-background antialiased">
+  <div id="cursor-dot"></div>
+  <div id="cursor-trail-container"></div>
+
+  <!-- Top Navigation Bar -->
+  <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_20px_40px_rgba(15,23,42,0.04)] font-manrope">
+    <div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-20">
+
+      <!-- Logo -->
+      <div class="flex items-center">
+        <div class="bg-white border border-slate-200 px-6 py-2 rounded-lg shadow-sm flex items-center">
+          <img src="img/logo.jpg" alt="KJS Township Logo" class="h-12 w-auto object-contain">
+        </div>
+      </div>
+
+      <!-- Menu -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a class="text-slate-500 hover:text-slate-900 transition-colors" href="index.html">
+          Home
+        </a>
+
+        <a id="blogLink" class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1" href="blog.html">
+          Blog
+        </a>
+
+        <a class="text-slate-500 hover:text-slate-900 transition-colors" href="#">
+          Investment
+        </a>
+
+        <a id="aboutLink" class="text-slate-500 hover:text-slate-900 transition-colors" href="about us.html">
+          About Us
+        </a>
+
+        <a id="contactLink" class="text-slate-500 hover:text-slate-900 transition-colors" href="contact.html">
+          Contact
+        </a>
+      </div>
+
+      <!-- Button -->
+      <button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md active:scale-95 transition-all hover:opacity-80">
+        Book a Visit
+      </button>
+    </div>
+  </nav>
+
+  <main class="pt-20">
+
+    <!-- Hero Section -->
+    <section class="relative h-[400px] flex items-center justify-center overflow-hidden">
+      <img 
+        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?fm=jpg&q=60&w=1600&fit=max"
+        alt="Industrial Blog"
+        class="absolute inset-0 w-full h-full object-cover"
+      >
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="absolute inset-0 hero-gradient"></div>
+      <div class="relative z-10 text-center px-6">
+        <h1 class="font-headline-xl text-on-primary mb-4">Insights, Trends & Industrial Opportunities</h1>
+        <p class="font-body-lg text-primary-fixed max-w-3xl mx-auto opacity-90">
+          Explore expert perspectives on industrial plots, location advantage, business expansion, and long-term investment potential with KJS Township.
+        </p>
+      </div>
+    </section>
+
+    <!-- Featured Blog -->
+    <section class="max-w-[1280px] mx-auto px-6 py-section-gap grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7 bg-white rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50 overflow-hidden">
+        <img
+          class="w-full h-[360px] object-cover"
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fm=jpg&q=60&w=1400&fit=max"
+          alt="Featured industrial blog"
+        />
+        <div class="p-10">
+          <p class="font-label-md uppercase tracking-[0.2em] text-outline mb-4">Featured Article</p>
+          <h2 class="font-headline-lg text-on-background mb-4">Why Industrial Plots Are Becoming a Strong Long-Term Investment</h2>
+          <p class="text-slate-600 leading-8 mb-6">
+            Industrial land is rapidly becoming a preferred choice for investors and businesses looking for future-ready growth. From warehousing demand to logistics expansion and manufacturing opportunities, industrial plots are creating a new category of smart real estate investment.
+          </p>
+          <a href="#" class="inline-flex items-center gap-2 text-slate-900 font-semibold hover:opacity-70 transition-all">
+            Read Full Article
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 space-y-8">
+        <div class="bg-surface-container p-8 rounded-xl border border-outline-variant/30">
+          <h3 class="font-headline-md text-on-surface mb-6">Blog Categories</h3>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between bg-white rounded-lg px-4 py-4 shadow-sm">
+              <span class="text-on-surface font-medium">Industrial Investment</span>
+              <span class="text-outline text-sm">06</span>
+            </div>
+            <div class="flex items-center justify-between bg-white rounded-lg px-4 py-4 shadow-sm">
+              <span class="text-on-surface font-medium">Location Benefits</span>
+              <span class="text-outline text-sm">04</span>
+            </div>
+            <div class="flex items-center justify-between bg-white rounded-lg px-4 py-4 shadow-sm">
+              <span class="text-on-surface font-medium">Warehouse & Factory Setup</span>
+              <span class="text-outline text-sm">05</span>
+            </div>
+            <div class="flex items-center justify-between bg-white rounded-lg px-4 py-4 shadow-sm">
+              <span class="text-on-surface font-medium">Business Expansion</span>
+              <span class="text-outline text-sm">03</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl overflow-hidden h-[300px] shadow-[0_20px_40px_rgba(15,23,42,0.04)] relative">
+          <img
+            class="w-full h-full object-cover"
+            src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80"
+            alt="Business planning"
+          />
+          <div class="absolute inset-0 bg-primary/10"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="max-w-[1280px] mx-auto px-6 pb-section-gap">
+      <div class="mb-10">
+        <p class="font-label-md uppercase tracking-[0.2em] text-outline mb-4">Latest Articles</p>
+        <h2 class="font-headline-lg text-on-background">Explore Our Recent Blogs</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50 overflow-hidden">
+          <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?fm=jpg&q=60&w=1200&fit=max" alt="Industrial location blog">
+          <div class="p-8">
+            <p class="text-outline text-sm mb-3">April 2026 • Location Insights</p>
+            <h3 class="font-headline-md text-on-background mb-3">What Makes a Great Industrial Location for Business Growth?</h3>
+            <p class="text-slate-600 leading-7 mb-5">
+              Understand the key factors that define a high-potential industrial destination, from road connectivity to surrounding infrastructure.
+            </p>
+            <a href="#" class="text-slate-900 font-semibold hover:opacity-70 transition-all">Read More</a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50 overflow-hidden">
+          <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?fm=jpg&q=60&w=1200&fit=max" alt="Warehouse business blog">
+          <div class="p-8">
+            <p class="text-outline text-sm mb-3">April 2026 • Warehouse Strategy</p>
+            <h3 class="font-headline-md text-on-background mb-3">Warehouse, Factory or Logistics Hub: Which Use Fits Best?</h3>
+            <p class="text-slate-600 leading-7 mb-5">
+              Different businesses need different industrial formats. Explore how to choose the right use case for your land investment.
+            </p>
+            <a href="#" class="text-slate-900 font-semibold hover:opacity-70 transition-all">Read More</a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50 overflow-hidden">
+          <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?fm=jpg&q=60&w=1200&fit=max" alt="Investor blog">
+          <div class="p-8">
+            <p class="text-outline text-sm mb-3">April 2026 • Investment Potential</p>
+            <h3 class="font-headline-md text-on-background mb-3">How Industrial Plots Support Smart Long-Term Investment Planning</h3>
+            <p class="text-slate-600 leading-7 mb-5">
+              Explore why industrial real estate is becoming attractive for investors who want practical demand and scalable returns.
+            </p>
+            <a href="#" class="text-slate-900 font-semibold hover:opacity-70 transition-all">Read More</a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50 overflow-hidden">
+          <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fm=jpg&q=60&w=1200&fit=max" alt="Industrial infrastructure blog">
+          <div class="p-8">
+            <p class="text-outline text-sm mb-3">April 2026 • Infrastructure</p>
+            <h3 class="font-headline-md text-on-background mb-3">Why Infrastructure Planning Matters Before Buying Industrial Land</h3>
+            <p class="text-slate-600 leading-7 mb-5">
+              From internal roads to access points and surrounding development, good planning directly impacts future usability and value.
+            </p>
+            <a href="#" class="text-slate-900 font-semibold hover:opacity-70 transition-all">Read More</a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50 overflow-hidden">
+          <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?fm=jpg&q=60&w=1200&fit=max" alt="Business planning blog">
+          <div class="p-8">
+            <p class="text-outline text-sm mb-3">April 2026 • Business Planning</p>
+            <h3 class="font-headline-md text-on-background mb-3">Build Your Business, Not Just Buy Land</h3>
+            <p class="text-slate-600 leading-7 mb-5">
+              Learn how industrial land can become a strategic asset when aligned with future operations, warehousing, and expansion goals.
+            </p>
+            <a href="#" class="text-slate-900 font-semibold hover:opacity-70 transition-all">Read More</a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50 overflow-hidden">
+          <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1460317442991-0ec209397118?fm=jpg&q=60&w=1200&fit=max" alt="Industrial market blog">
+          <div class="p-8">
+            <p class="text-outline text-sm mb-3">April 2026 • Market Trends</p>
+            <h3 class="font-headline-md text-on-background mb-3">The Rise of Industrial Real Estate in New-Age Investment Portfolios</h3>
+            <p class="text-slate-600 leading-7 mb-5">
+              As logistics and manufacturing demand increases, industrial assets are gaining more attention in forward-looking portfolios.
+            </p>
+            <a href="#" class="text-slate-900 font-semibold hover:opacity-70 transition-all">Read More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter / CTA -->
+    <section class="max-w-[1280px] mx-auto px-6 pb-section-gap">
+      <div class="bg-on-background p-12 rounded-xl flex flex-col md:flex-row items-center justify-between gap-8 text-on-primary">
+        <div class="max-w-xl">
+          <h2 class="font-headline-lg mb-2">Stay Updated with KJS Township</h2>
+          <p class="font-body-md text-slate-400">Get fresh updates on industrial land trends, opportunities, and project highlights directly from us.</p>
+        </div>
+        <div class="flex w-full md:w-auto gap-2">
+          <input class="bg-white/10 border-white/20 rounded px-6 py-3 w-full md:w-64 focus:ring-1 focus:ring-primary-fixed outline-none" placeholder="Email Address" type="email"/>
+          <button class="bg-secondary-container text-on-secondary-container px-8 py-3 rounded font-label-md hover:bg-secondary-fixed transition-colors shrink-0">
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-50 border-t border-slate-200 py-12 font-manrope">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1280px] mx-auto px-6">
+      <div class="space-y-4">
+        <div class="text-xl font-bold text-slate-900">KJS Township</div>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          KJS Township is a future-ready industrial destination built for long-term growth and opportunity.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Explore</h4>
+        <ul class="space-y-2 text-sm text-slate-500">
+          <li><a class="hover:text-slate-900 transition-colors" href="index.html">Home</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="about us.html">About Us</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="blog.html">Blog</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Legal</h4>
+        <ul class="space-y-2 text-sm text-slate-500">
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Privacy Policy</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Terms of Service</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Cookie Policy</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Sitemap</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Follow Us</h4>
+        <div class="flex gap-4">
+          <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+              <i class="fa-brands fa-facebook-f text-[20px]"></i>
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com/kjstownshipofficial/" target="_blank">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+              <i class="fa-brands fa-instagram text-[20px]"></i>
+            </div>
+          </a>
+
+          <div onclick="sharePage()" class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">share</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-[1280px] mx-auto px-6 mt-12 pt-8 border-t border-slate-200 text-center text-slate-500 text-sm flex justify-center">
+      <span>© 2026 KJS Township all rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({
+          title: "KJS Township",
+          text: "Check out this industrial project",
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert("Link copied!");
+      }
+    }
+  </script>
+
+  <script>
+    const dot = document.getElementById("cursor-dot");
+    const trailContainer = document.getElementById("cursor-trail-container");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let dotX = mouseX - 25;
+    let dotY = mouseY - 25;
+
+    let lastMouseX = mouseX;
+    let lastMouseY = mouseY;
+    let speed = 0;
+
+    const gap = 25;
+    const smooth = 0.18;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      const dx = mouseX - lastMouseX;
+      const dy = mouseY - lastMouseY;
+      speed = Math.sqrt(dx * dx + dy * dy);
+
+      if (speed > 8) {
+        createTrail(dotX, dotY);
+      }
+
+      lastMouseX = mouseX;
+      lastMouseY = mouseY;
+    });
+
+    function animateDot() {
+      let dx = mouseX - dotX;
+      let dy = mouseY - dotY;
+      let distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance > gap) {
+        let targetX = mouseX - (dx / distance) * gap;
+        let targetY = mouseY - (dy / distance) * gap;
+
+        dotX += (targetX - dotX) * smooth;
+        dotY += (targetY - dotY) * smooth;
+      }
+
+      dot.style.left = dotX + "px";
+      dot.style.top = dotY + "px";
+
+      const stretch = Math.min(speed * 0.02, 0.5);
+      dot.style.transform = `translate(-50%, -50%) scale(${1 + stretch}, ${1 - stretch * 0.25})`;
+
+      speed *= 0.90;
+
+      requestAnimationFrame(animateDot);
+    }
+
+    function createTrail(x, y) {
+      const trail = document.createElement("div");
+      trail.className = "trail-dot";
+      trail.style.left = x + "px";
+      trail.style.top = y + "px";
+      trailContainer.appendChild(trail);
+
+      setTimeout(() => {
+        trail.remove();
+      }, 450);
+    }
+
+    animateDot();
+  </script>
+
+  <script>
+    const path = window.location.pathname;
+
+    if (path.includes("about us.html")) {
+      document.getElementById("aboutLink").classList.add("text-slate-900","font-semibold","border-b-2","border-slate-900","pb-1");
+    }
+
+    if (path.includes("contact.html")) {
+      document.getElementById("contactLink").classList.add("text-slate-900","font-semibold","border-b-2","border-slate-900","pb-1");
+    }
+
+    if (path.includes("blog.html")) {
+      document.getElementById("blogLink").classList.add("text-slate-900","font-semibold","border-b-2","border-slate-900","pb-1");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#0b1c30",
+            "tertiary-container": "#002201",
+            "surface-bright": "#f8f9ff",
+            "primary-fixed": "#dae2fd",
+            "on-secondary-fixed-variant": "#5e4200",
+            "secondary-fixed-dim": "#ecc070",
+            "secondary": "#795911",
+            "outline-variant": "#c6c6cd",
+            "on-tertiary-fixed": "#002201",
+            "on-secondary-container": "#785810",
+            "on-primary": "#ffffff",
+            "secondary-fixed": "#ffdea6",
+            "on-primary-container": "#7c839b",
+            "on-tertiary-fixed-variant": "#23501e",
+            "surface-variant": "#d3e4fe",
+            "on-error": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#3f465c",
+            "on-tertiary-container": "#609056",
+            "surface": "#f8f9ff",
+            "tertiary-fixed": "#bcf0ae",
+            "inverse-primary": "#bec6e0",
+            "surface-container-low": "#eff4ff",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#fed17f",
+            "surface-container": "#e5eeff",
+            "on-primary-fixed": "#131b2e",
+            "surface-tint": "#565e74",
+            "surface-container-high": "#dce9ff",
+            "tertiary": "#000000",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#d3e4fe",
+            "error": "#ba1a1a",
+            "primary-fixed-dim": "#bec6e0",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#a1d494",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#76777d",
+            "on-surface-variant": "#45464d",
+            "inverse-on-surface": "#eaf1ff",
+            "background": "#f8f9ff",
+            "primary-container": "#131b2e",
+            "on-surface": "#0b1c30",
+            "inverse-surface": "#213145",
+            "primary": "#000000",
+            "surface-dim": "#cbdbf5",
+            "on-secondary-fixed": "#271900"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "base": "8px",
+            "section-gap": "80px",
+            "stack-lg": "32px",
+            "margin": "32px",
+            "container-max": "1280px",
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "gutter": "24px"
+          },
+          fontFamily: {
+            "body-lg": ["Manrope"],
+            "label-md": ["Manrope"],
+            "body-md": ["Manrope"],
+            "headline-xl": ["Manrope"],
+            "headline-md": ["Manrope"],
+            "headline-lg": ["Manrope"]
+          },
+          fontSize: {
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(rgba(11, 28, 48, 0.72), rgba(11, 28, 48, 0.72));
+    }
+
+    #cursor-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: black;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.18);
+    }
+
+    #cursor-trail-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .trail-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: trailFade 0.45s ease-out forwards;
+    }
+
+    @keyframes trailFade {
+      0% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Home - KJS Township</title>
+</head>
+
+<body class="bg-background font-body-md text-on-background antialiased">
+  <div id="cursor-dot"></div>
+  <div id="cursor-trail-container"></div>
+
+  <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_20px_40px_rgba(15,23,42,0.04)] font-manrope">
+    <div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-20">
+      <div class="flex items-center">
+        <div class="bg-white border border-slate-200 px-6 py-2 rounded-lg shadow-sm flex items-center">
+          <img src="img/logo.pdf .png" alt="KJS Township Logo" class="h-12 w-auto object-contain">
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-8">
+        <a id="homeLink" class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1" href="index.html">
+          Home
+        </a>
+
+        <a id="blogLink" class="text-slate-500 hover:text-slate-900 transition-colors" href="blog.html">
+          Blog
+        </a>
+
+        <a class="text-slate-500 hover:text-slate-900 transition-colors" href="#">
+          Investment
+        </a>
+
+        <a id="aboutLink" class="text-slate-500 hover:text-slate-900 transition-colors" href="about us.html">
+          About Us
+        </a>
+
+        <a id="contactLink" class="text-slate-500 hover:text-slate-900 transition-colors" href="contact.html">
+          Contact
+        </a>
+      </div>
+
+      <button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md active:scale-95 transition-all hover:opacity-80">
+        Book a Visit
+      </button>
+    </div>
+  </nav>
+
+  <main class="pt-20">
+    <section class="relative min-h-[720px] flex items-center overflow-hidden">
+      <img
+        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?fm=jpg&q=60&w=1800&fit=max"
+        alt="KJS Township Hero"
+        class="absolute inset-0 w-full h-full object-cover"
+      >
+      <div class="absolute inset-0 hero-gradient"></div>
+
+      <div class="relative z-10 max-w-[1280px] mx-auto px-6 w-full">
+        <div class="max-w-3xl">
+          <p class="font-label-md uppercase tracking-[0.2em] text-primary-fixed mb-6">
+            Premium Industrial Plots
+          </p>
+          <h1 class="font-headline-xl text-on-primary mb-6">
+            Build Your Business in a Location Designed for Industrial Growth
+          </h1>
+          <p class="font-body-lg text-primary-fixed max-w-2xl opacity-90 mb-10">
+            KJS Township offers future-ready industrial plots for warehousing, factory setup, logistics, and long-term investment in a strategically growing region near Delhi NCR.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="contact.html" class="bg-white text-slate-900 px-8 py-4 rounded-lg font-label-md hover:opacity-90 transition-all">
+              Enquire Now
+            </a>
+            <a href="about us.html" class="border border-white/30 text-white px-8 py-4 rounded-lg font-label-md hover:bg-white/10 transition-all">
+              Explore Project
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+
+    <section class="max-w-[1280px] mx-auto px-6 py-section-gap">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+          <div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-primary">location_on</span>
+          </div>
+          <h3 class="font-headline-md text-on-background mb-4">Strategic Location</h3>
+          <p class="text-slate-600 leading-7">
+            Positioned for excellent connectivity and industrial accessibility, making it suitable for business operations and future expansion.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+          <div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-primary">warehouse</span>
+          </div>
+          <h3 class="font-headline-md text-on-background mb-4">Industrial Use</h3>
+          <p class="text-slate-600 leading-7">
+            Ideal for warehouse development, factory setup, logistics operations, and industrial expansion in a planned environment.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+          <div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-primary">trending_up</span>
+          </div>
+          <h3 class="font-headline-md text-on-background mb-4">Long-Term Value</h3>
+          <p class="text-slate-600 leading-7">
+            A project built with future growth, appreciation potential, and business-focused investment opportunities in mind.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-[1280px] mx-auto px-6 pb-section-gap grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7 bg-white p-10 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+        <p class="font-label-md uppercase tracking-[0.2em] text-outline mb-4">Welcome to KJS Township</p>
+        <h2 class="font-headline-lg text-on-background mb-6">An Industrial Destination Built for Visionary Growth</h2>
+
+        <div class="space-y-5 text-slate-600 leading-8">
+          <p>
+            KJS Township is a thoughtfully positioned industrial project created for businesses, investors, and enterprises looking to establish themselves in a location that supports industrial performance and long-term value.
+          </p>
+          <p>
+            Whether you want to develop a warehouse, logistics base, industrial facility, or strategic land investment, KJS Township offers the kind of location advantage and future readiness that modern businesses require.
+          </p>
+          <p>
+            We focus on combining planning, accessibility, and growth potential to deliver more than just land. We create industrial opportunities that align with expansion, movement, and practical business needs.
+          </p>
+        </div>
+
+        <div class="mt-8">
+          <a href="about us.html" class="inline-flex items-center gap-2 text-slate-900 font-semibold hover:opacity-70 transition-all">
+            Discover More About Us
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 space-y-8">
+        <div class="rounded-xl overflow-hidden h-[300px] shadow-[0_20px_40px_rgba(15,23,42,0.04)] relative">
+          <img
+            class="w-full h-full object-cover"
+            src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?fm=jpg&q=60&w=1200&fit=max"
+            alt="Industrial property view"
+          />
+          <div class="absolute inset-0 bg-primary/10"></div>
+        </div>
+
+        <div class="bg-surface-container p-8 rounded-xl border border-outline-variant/30">
+          <h3 class="font-headline-md text-on-surface mb-6">Why Businesses Choose KJS Township</h3>
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+              <p class="text-slate-600 leading-7">Location advantage for industrial movement and business accessibility.</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+              <p class="text-slate-600 leading-7">Suitable for warehouses, factories, and logistics operations.</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+              <p class="text-slate-600 leading-7">Strong future potential for growth-driven investors and enterprises.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="max-w-[1280px] mx-auto px-6 pb-section-gap">
+  <div class="mb-10">
+    <p class="font-label-md uppercase tracking-[0.2em] text-outline mb-4">Project Visuals</p>
+    <h2 class="font-headline-lg text-on-background">Site Gallery</h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    
+    <div class="bg-white rounded-xl overflow-hidden border border-slate-50 transition-all duration-300 transform hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)] shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+      <div class="overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?fm=jpg&q=60&w=1200&fit=max" alt="Industrial site view" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+      </div>
+      <div class="p-5">
+        <h3 class="font-semibold text-slate-900 mb-2">Industrial Plot View</h3>
+        <p class="text-slate-600 text-sm leading-6">Planned space designed for industrial growth and future-ready development.</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl overflow-hidden border border-slate-50 transition-all duration-300 transform hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)] shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+      <div class="overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?fm=jpg&q=60&w=1200&fit=max" alt="Warehouse infrastructure" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+      </div>
+      <div class="p-5">
+        <h3 class="font-semibold text-slate-900 mb-2">Warehouse Potential</h3>
+        <p class="text-slate-600 text-sm leading-6">An ideal environment for warehouse, factory, and logistics development.</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl overflow-hidden border border-slate-50 transition-all duration-300 transform hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)] shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+      <div class="overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fm=jpg&q=60&w=1200&fit=max" alt="Business growth" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+      </div>
+      <div class="p-5">
+        <h3 class="font-semibold text-slate-900 mb-2">Business Expansion</h3>
+        <p class="text-slate-600 text-sm leading-6">A strong destination for businesses planning long-term industrial operations.</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl overflow-hidden border border-slate-50 transition-all duration-300 transform hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)] shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+      <div class="overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?fm=jpg&q=60&w=1200&fit=max" alt="Industrial planning" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+      </div>
+      <div class="p-5">
+        <h3 class="font-semibold text-slate-900 mb-2">Planned Development</h3>
+        <p class="text-slate-600 text-sm leading-6">Thoughtfully positioned plots with long-term industrial usability in mind.</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl overflow-hidden border border-slate-50 transition-all duration-300 transform hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)] shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+      <div class="overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?fm=jpg&q=60&w=1200&fit=max" alt="Industrial setup" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+      </div>
+      <div class="p-5">
+        <h3 class="font-semibold text-slate-900 mb-2">Industrial Opportunity</h3>
+        <p class="text-slate-600 text-sm leading-6">Suitable for warehousing, manufacturing, and industrial infrastructure setup.</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl overflow-hidden border border-slate-50 transition-all duration-300 transform hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)] shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+      <div class="overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?fm=jpg&q=60&w=1200&fit=max" alt="Growth zone" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+      </div>
+      <div class="p-5">
+        <h3 class="font-semibold text-slate-900 mb-2">Future Growth Zone</h3>
+        <p class="text-slate-600 text-sm leading-6">A location with strong potential for industrial demand and appreciation.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- Testinomial  -->
+
+<section class="max-w-[1280px] mx-auto px-6 pb-section-gap">
+
+  <!-- Header -->
+  <div class="mb-12 text-center">
+    <div class="flex justify-center mb-4">
+      <div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary text-2xl">format_quote</span>
+      </div>
+    </div>
+
+    <p class="font-label-md uppercase tracking-[0.2em] text-outline mb-3">
+      Trust & Feedback
+    </p>
+
+    <h2 class="font-headline-lg text-on-background max-w-2xl mx-auto">
+      What People Appreciate About KJS Township
+    </h2>
+  </div>
+
+  <!-- Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+    <!-- Card 1 -->
+    <div class="bg-white p-8 rounded-xl border border-slate-50 
+                shadow-[0_20px_40px_rgba(15,23,42,0.04)] 
+                transition-all duration-300 
+                hover:-translate-y-3 hover:shadow-[0_30px_60px_rgba(15,23,42,0.12)] text-center">
+
+      <div class="flex justify-center mb-5">
+        <div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-2xl">person</span>
+        </div>
+      </div>
+
+      <div class="flex justify-center gap-1 mb-5">
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+      </div>
+
+      <p class="text-slate-600 leading-8 mb-6">
+        “The location advantage and industrial potential made this project stand out for long-term investment planning.”
+      </p>
+
+      <div>
+        <h4 class="font-semibold text-slate-900">Investor Perspective</h4>
+        <p class="text-sm text-outline">Industrial Investment Interest</p>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="bg-white p-8 rounded-xl border border-slate-50 
+                shadow-[0_20px_40px_rgba(15,23,42,0.04)] 
+                transition-all duration-300 
+                hover:-translate-y-3 hover:shadow-[0_30px_60px_rgba(15,23,42,0.12)] text-center">
+
+      <div class="flex justify-center mb-5">
+        <div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-2xl">person</span>
+        </div>
+      </div>
+
+      <div class="flex justify-center gap-1">
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-slate-300">star</span>
+      </div>
+
+      <p class="text-slate-600 leading-8 mb-6">
+        “A strong option for businesses looking to expand with warehouse and logistics possibilities in mind.”
+      </p>
+
+      <div>
+        <h4 class="font-semibold text-slate-900">Business Owner View</h4>
+        <p class="text-sm text-outline">Expansion-Focused Buyer</p>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="bg-white p-8 rounded-xl border border-slate-50 
+                shadow-[0_20px_40px_rgba(15,23,42,0.04)] 
+                transition-all duration-300 
+                hover:-translate-y-3 hover:shadow-[0_30px_60px_rgba(15,23,42,0.12)] text-center">
+
+      <div class="flex justify-center mb-5">
+        <div class="w-14 h-14 rounded-full bg-surface-container flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-2xl">person</span>
+        </div>
+      </div>
+
+      <div class="flex justify-center gap-1 mb-5">
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+        <span class="material-symbols-outlined text-yellow-500">star</span>
+      </div>
+
+      <p class="text-slate-600 leading-8 mb-6">
+        “The project gives a professional and growth-oriented feel, especially for industrial use and future planning.”
+      </p>
+
+      <div>
+        <h4 class="font-semibold text-slate-900">Client Experience</h4>
+        <p class="text-sm text-outline">Project Interest Feedback</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- Key Highlight -->
+    <section class="max-w-[1280px] mx-auto px-6 pb-section-gap">
+  <div class="bg-surface-container p-10 rounded-xl border border-outline-variant/30">
+
+    <!-- CENTER HEADER -->
+    <div class="max-w-3xl mx-auto mb-10 text-center">
+      <p class="font-label-md uppercase tracking-[0.2em] text-outline mb-4">
+        Key Highlights
+      </p>
+
+      <h2 class="font-headline-lg text-on-background mb-4">
+        Built Around Real Business Needs
+      </h2>
+
+      <p class="text-slate-600 leading-8">
+        Every industrial opportunity depends on the right combination of location, usability, planning, and growth potential. KJS Township is developed to support those essentials.
+      </p>
+    </div>
+
+    <!-- CARDS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      
+      <div class="bg-white p-6 rounded-xl border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+        <h4 class="font-semibold text-slate-900 mb-3">Prime Connectivity</h4>
+        <p class="text-slate-600 text-sm leading-6">Smooth access to major roads and regional industrial movement routes.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+        <h4 class="font-semibold text-slate-900 mb-3">Flexible Industrial Use</h4>
+        <p class="text-slate-600 text-sm leading-6">Suitable for logistics, warehousing, industrial setup, and growth-oriented land use.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+        <h4 class="font-semibold text-slate-900 mb-3">Growth Perspective</h4>
+        <p class="text-slate-600 text-sm leading-6">A destination aligned with future industrial demand and long-term value creation.</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+        <h4 class="font-semibold text-slate-900 mb-3">Planned Opportunity</h4>
+        <p class="text-slate-600 text-sm leading-6">An industrial environment designed to support practical, scalable business expansion.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+    <section class="max-w-[1280px] mx-auto px-6 pb-section-gap">
+
+  <!-- CENTER HEADER -->
+  <div class="mb-10 text-center">
+    <p class="font-label-md uppercase tracking-[0.2em] text-outline mb-4">
+      Latest Insights
+    </p>
+
+    <h2 class="font-headline-lg text-on-background">
+      From Our Blog
+    </h2>
+  </div>
+
+  <!-- BLOG CARDS -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+    <div class="bg-white rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50 overflow-hidden transition-all duration-300 hover:-translate-y-3 hover:shadow-[0_30px_60px_rgba(15,23,42,0.12)]">
+      <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fm=jpg&q=60&w=1200&fit=max">
+      <div class="p-8">
+        <p class="text-outline text-sm mb-3">Industrial Investment</p>
+        <h3 class="font-headline-md text-on-background mb-3">
+          Why Industrial Plots Are Becoming a Strong Long-Term Investment
+        </h3>
+        <p class="text-slate-600 leading-7 mb-5">
+          Explore why industrial land is gaining attention among growth-focused investors.
+        </p>
+        <a href="blog.html" class="text-slate-900 font-semibold hover:opacity-70 transition-all">
+          Read More
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50 overflow-hidden transition-all duration-300 hover:-translate-y-3 hover:shadow-[0_30px_60px_rgba(15,23,42,0.12)]">
+      <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?fm=jpg&q=60&w=1200&fit=max">
+      <div class="p-8">
+        <p class="text-outline text-sm mb-3">Warehouse & Factory</p>
+        <h3 class="font-headline-md text-on-background mb-3">
+          Warehouse, Factory or Logistics Hub: Which Use Fits Best?
+        </h3>
+        <p class="text-slate-600 leading-7 mb-5">
+          Understand which industrial format best supports your business goals.
+        </p>
+        <a href="blog.html" class="text-slate-900 font-semibold hover:opacity-70 transition-all">
+          Read More
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50 overflow-hidden transition-all duration-300 hover:-translate-y-3 hover:shadow-[0_30px_60px_rgba(15,23,42,0.12)]">
+      <img class="w-full h-56 object-cover" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?fm=jpg&q=60&w=1200&fit=max">
+      <div class="p-8">
+        <p class="text-outline text-sm mb-3">Location Benefits</p>
+        <h3 class="font-headline-md text-on-background mb-3">
+          What Makes a Great Industrial Location for Business Growth?
+        </h3>
+        <p class="text-slate-600 leading-7 mb-5">
+          Learn why location remains the foundation of industrial success and land value.
+        </p>
+        <a href="blog.html" class="text-slate-900 font-semibold hover:opacity-70 transition-all">
+          Read More
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- CTA SECTION -->
+<section class="max-w-[1280px] mx-auto px-6 pb-section-gap">
+
+  <div class="bg-on-background p-12 rounded-xl text-on-primary text-center">
+
+    <!-- CENTER HEADER -->
+    <p class="font-label-md uppercase tracking-[0.2em] text-slate-400 mb-4">
+      Take the Next Step
+    </p>
+
+    <h2 class="font-headline-lg mb-4">
+      Ready to Explore KJS Township?
+    </h2>
+
+    <p class="font-body-md text-slate-300 leading-8 max-w-2xl mx-auto mb-8">
+      Book a site visit, talk to our team, download the brochure, or get complete project details to make a confident industrial investment decision.
+    </p>
+
+    <!-- BUTTONS -->
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="contact.html" class="bg-white text-slate-900 px-6 py-3 rounded-lg font-label-md hover:opacity-90 transition-all">
+        Book a Site Visit
+      </a>
+
+      <a href="contact.html" class="border border-white/20 text-white px-6 py-3 rounded-lg font-label-md hover:bg-white/10 transition-all">
+        Talk to Our Team
+      </a>
+
+      <a href="#" class="border border-white/20 text-white px-6 py-3 rounded-lg font-label-md hover:bg-white/10 transition-all">
+        Download Brochure
+      </a>
+
+      <a href="contact.html" class="border border-white/20 text-white px-6 py-3 rounded-lg font-label-md hover:bg-white/10 transition-all">
+        Get Project Details
+      </a>
+    </div>
+
+  </div>
+
+</section>
+
+  <div class="flex flex-wrap gap-4">
+
+  <!-- Button 1 -->
+  <a href="contact.html"
+     class="px-6 py-3 rounded-lg font-label-md border border-white/20 text-white transition-all
+     hover:bg-white hover:text-slate-900">
+    Book a Site Visit
+  </a>
+
+  <!-- Button 2 -->
+  <a href="contact.html"
+     class="px-6 py-3 rounded-lg font-label-md border border-white/20 text-white transition-all
+     hover:bg-white hover:text-slate-900">
+    Talk to Our Team
+  </a>
+
+  <!-- Button 3 -->
+  <a href="#"
+     class="px-6 py-3 rounded-lg font-label-md border border-white/20 text-white transition-all
+     hover:bg-white hover:text-slate-900">
+    Download Brochure
+  </a>
+
+  <!-- Button 4 -->
+  <a href="contact.html"
+     class="px-6 py-3 rounded-lg font-label-md border border-white/20 text-white transition-all
+     hover:bg-white hover:text-slate-900">
+    Get Project Details
+  </a>
+
+</div>
+
+    <section class="max-w-[1280px] mx-auto px-6 pb-section-gap grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7 rounded-xl overflow-hidden h-[360px] shadow-[0_20px_40px_rgba(15,23,42,0.04)] relative">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1750.4084745231219!2d76.83145869663997!3d28.665199142851865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0d67009eb11b%3A0x996885e6d2c09eda!2sKJS%20Township!5e0!3m2!1sen!2sin!4v1776933267262!5m2!1sen!2sin"
+          class="w-full h-full border-0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+
+        <div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
+
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+          <div class="relative">
+            <div class="absolute -inset-4 bg-primary/20 rounded-full animate-ping"></div>
+            <span class="material-symbols-outlined text-primary text-4xl relative z-10" style="font-variation-settings: 'FILL' 1;">
+              location_on
+            </span>
+          </div>
+        </div>
+
+        <a href="https://www.google.com/maps?q=KJS+Township" target="_blank">
+          <div class="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-md font-label-md text-xs cursor-pointer">
+            Open in Google Maps
+          </div>
+        </a>
+      </div>
+
+      <div class="lg:col-span-5 space-y-8">
+        <div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+          <h3 class="font-headline-md text-on-background mb-5">Connect With Us</h3>
+          <p class="text-slate-600 leading-7 mb-6">
+            Follow KJS Township to stay updated with industrial opportunities, project highlights, and location-driven growth insights.
+          </p>
+
+          <div class="flex gap-4">
+            <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
+              <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+                <i class="fa-brands fa-facebook-f text-[20px]"></i>
+              </div>
+            </a>
+
+            <a href="https://www.instagram.com/kjstownshipofficial/" target="_blank">
+              <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+                <i class="fa-brands fa-instagram text-[20px]"></i>
+              </div>
+            </a>
+
+            <div onclick="sharePage()" class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[20px]">share</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-on-background p-8 rounded-xl text-on-primary">
+          <h3 class="font-headline-md mb-4">Build Your Business, Not Just Buy Land</h3>
+          <p class="text-slate-300 leading-7 mb-6">
+            Discover a location built for industrial ambition, business movement, and long-term opportunity.
+          </p>
+          <a href="contact.html" class="inline-block bg-secondary-container text-on-secondary-container px-6 py-3 rounded-lg font-label-md hover:bg-secondary-fixed transition-colors">
+            Schedule a Visit
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-slate-50 border-t border-slate-200 py-12 font-manrope">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1280px] mx-auto px-6">
+      <div class="space-y-4">
+        <div class="text-xl font-bold text-slate-900">KJS Township</div>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          KJS Township is a future-ready industrial destination built for long-term growth and opportunity.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Explore</h4>
+        <ul class="space-y-2 text-sm text-slate-500">
+          <li><a class="hover:text-slate-900 transition-colors" href="index.html">Home</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="about us.html">About Us</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="blog.html">Blog</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Legal</h4>
+        <ul class="space-y-2 text-sm text-slate-500">
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Privacy Policy</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Terms of Service</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Cookie Policy</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Sitemap</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Follow Us</h4>
+        <div class="flex gap-4">
+          <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+              <i class="fa-brands fa-facebook-f text-[20px]"></i>
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com/kjstownshipofficial/" target="_blank">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+              <i class="fa-brands fa-instagram text-[20px]"></i>
+            </div>
+          </a>
+
+          <div onclick="sharePage()" class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">share</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-[1280px] mx-auto px-6 mt-12 pt-8 border-t border-slate-200 text-center text-slate-500 text-sm flex justify-center">
+      <span>© 2026 KJS Township all rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({
+          title: "KJS Township",
+          text: "Check out this industrial project",
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert("Link copied!");
+      }
+    }
+  </script>
+
+  <script>
+    const dot = document.getElementById("cursor-dot");
+    const trailContainer = document.getElementById("cursor-trail-container");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let dotX = mouseX - 25;
+    let dotY = mouseY - 25;
+
+    let lastMouseX = mouseX;
+    let lastMouseY = mouseY;
+    let speed = 0;
+
+    const gap = 25;
+    const smooth = 0.18;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      const dx = mouseX - lastMouseX;
+      const dy = mouseY - lastMouseY;
+      speed = Math.sqrt(dx * dx + dy * dy);
+
+      if (speed > 8) {
+        createTrail(dotX, dotY);
+      }
+
+      lastMouseX = mouseX;
+      lastMouseY = mouseY;
+    });
+
+    function animateDot() {
+      let dx = mouseX - dotX;
+      let dy = mouseY - dotY;
+      let distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance > gap) {
+        let targetX = mouseX - (dx / distance) * gap;
+        let targetY = mouseY - (dy / distance) * gap;
+
+        dotX += (targetX - dotX) * smooth;
+        dotY += (targetY - dotY) * smooth;
+      }
+
+      dot.style.left = dotX + "px";
+      dot.style.top = dotY + "px";
+
+      const stretch = Math.min(speed * 0.02, 0.5);
+      dot.style.transform = `translate(-50%, -50%) scale(${1 + stretch}, ${1 - stretch * 0.25})`;
+
+      speed *= 0.90;
+
+      requestAnimationFrame(animateDot);
+    }
+
+    function createTrail(x, y) {
+      const trail = document.createElement("div");
+      trail.className = "trail-dot";
+      trail.style.left = x + "px";
+      trail.style.top = y + "px";
+      trailContainer.appendChild(trail);
+
+      setTimeout(() => {
+        trail.remove();
+      }, 450);
+    }
+
+    animateDot();
+  </script>
+</body>
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#0b1c30",
+            "tertiary-container": "#002201",
+            "surface-bright": "#f8f9ff",
+            "primary-fixed": "#dae2fd",
+            "on-secondary-fixed-variant": "#5e4200",
+            "secondary-fixed-dim": "#ecc070",
+            "secondary": "#795911",
+            "outline-variant": "#c6c6cd",
+            "on-tertiary-fixed": "#002201",
+            "on-secondary-container": "#785810",
+            "on-primary": "#ffffff",
+            "secondary-fixed": "#ffdea6",
+            "on-primary-container": "#7c839b",
+            "on-tertiary-fixed-variant": "#23501e",
+            "surface-variant": "#d3e4fe",
+            "on-error": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#3f465c",
+            "on-tertiary-container": "#609056",
+            "surface": "#f8f9ff",
+            "tertiary-fixed": "#bcf0ae",
+            "inverse-primary": "#bec6e0",
+            "surface-container-low": "#eff4ff",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#fed17f",
+            "surface-container": "#e5eeff",
+            "on-primary-fixed": "#131b2e",
+            "surface-tint": "#565e74",
+            "surface-container-high": "#dce9ff",
+            "tertiary": "#000000",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#d3e4fe",
+            "error": "#ba1a1a",
+            "primary-fixed-dim": "#bec6e0",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#a1d494",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#76777d",
+            "on-surface-variant": "#45464d",
+            "inverse-on-surface": "#eaf1ff",
+            "background": "#f8f9ff",
+            "primary-container": "#131b2e",
+            "on-surface": "#0b1c30",
+            "inverse-surface": "#213145",
+            "primary": "#000000",
+            "surface-dim": "#cbdbf5",
+            "on-secondary-fixed": "#271900"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "base": "8px",
+            "section-gap": "80px",
+            "stack-lg": "32px",
+            "margin": "32px",
+            "container-max": "1280px",
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "gutter": "24px"
+          },
+          fontFamily: {
+            "body-lg": ["Manrope"],
+            "label-md": ["Manrope"],
+            "body-md": ["Manrope"],
+            "headline-xl": ["Manrope"],
+            "headline-md": ["Manrope"],
+            "headline-lg": ["Manrope"]
+          },
+          fontSize: {
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .hero-gradient {
+      background: linear-gradient(rgba(11, 28, 48, 0.72), rgba(11, 28, 48, 0.72));
+    }
+
+    #cursor-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: black;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.18);
+    }
+
+    #cursor-trail-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .trail-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: trailFade 0.45s ease-out forwards;
+    }
+
+    @keyframes trailFade {
+      0% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>About Us - KJS Township</title>
+</head>
+
+<body class="bg-background font-body-md text-on-background antialiased">
+  <div id="cursor-dot"></div>
+  <div id="cursor-trail-container"></div>
+
+  <!-- Top Navigation Bar -->
+ <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_20px_40px_rgba(15,23,42,0.04)] font-manrope">
+  <div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-20">
+
+    <!-- Logo -->
+   <div class="flex items-center">
+  <div class="bg-white border border-slate-200 px-6 py-2 rounded-lg shadow-sm flex items-center">
+    <img src="img/logo.jpg" alt="KJS Township Logo" class="h-12 w-auto object-contain">
+  </div>
+</div>
+
+    <!-- Menu -->
+    <div class="hidden md:flex items-center space-x-8">
+
+      <a class="text-slate-500 hover:text-slate-900 transition-colors" href="index.html">
+        Home
+      </a>
+
+      <a class="text-slate-500 hover:text-slate-900 transition-colors" href="blog.html">
+        Blog
+      </a>
+
+      <a class="text-slate-500 hover:text-slate-900 transition-colors" href="#">
+        Investment
+      </a>
+
+      <!-- About -->
+      <a id="aboutLink" class="text-slate-500 hover:text-slate-900 transition-colors" href="about us.html">
+        About Us
+      </a>
+
+      <!-- Contact -->
+      <a id="contactLink" class="text-slate-500 hover:text-slate-900 transition-colors" href="contact.html">
+        Contact
+      </a>
+
+    </div>
+
+    <!-- Button -->
+    <button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md active:scale-95 transition-all hover:opacity-80">
+      Book a Visit
+    </button>
+
+  </div>
+</nav>
+
+<main class="pt-20">
+    <!-- Hero Section -->
+    <section class="relative h-[400px] flex items-center justify-center overflow-hidden">
+    <img 
+    src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?fm=jpg&q=60&w=1600&fit=max"
+    alt="Industrial Real Estate"
+    class="absolute inset-0 w-full h-full object-cover"
+  >
+  <div class="absolute inset-0 bg-black/40"></div>
+      <div class="absolute inset-0 hero-gradient"></div>
+      <div class="relative z-10 text-center px-6">
+        <h1 class="font-headline-xl text-on-primary mb-4">A Vision Built for Industrial Growth</h1>
+        <p class="font-body-lg text-primary-fixed max-w-3xl mx-auto opacity-90">
+          KJS Township is designed to create a future-ready industrial destination where location, planning,
+          infrastructure, and long-term investment value come together.
+        </p>
+      </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="max-w-[1280px] mx-auto px-6 py-section-gap grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7 bg-white p-10 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+        <p class="font-label-md uppercase tracking-[0.2em] text-outline mb-4">Who We Are</p>
+        <h2 class="font-headline-lg text-on-background mb-6">About KJS Township</h2>
+
+        <div class="space-y-5 text-slate-600 leading-8">
+          <p>
+            KJS Township is a premium industrial plot development created for businesses, investors,
+            manufacturers, warehouse operators, and logistics expansion. Our focus is to build a destination
+            that supports industrial development with strong connectivity and future potential.
+          </p>
+          <p>
+            Strategically located near Delhi NCR, KJS Township offers an ideal opportunity for those looking
+            to establish industrial operations or invest in a location with long-term growth prospects. The
+            project is planned to align with modern business needs, offering both practicality and value.
+          </p>
+          <p>
+            We believe industrial real estate should do more than provide land. It should create a foundation
+            for growth, movement, productivity, and long-term business success. That is the vision behind
+            KJS Township.
+          </p>
+        </div>
+      </div>
+      
+
+      <div class="lg:col-span-5 space-y-8">
+        <div class="bg-surface-container p-8 rounded-xl border border-outline-variant/30">
+          <h3 class="font-headline-md text-on-surface mb-6">At a Glance</h3>
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0">
+                <span class="material-symbols-outlined text-primary">location_on</span>
+              </div>
+              <div>
+                <p class="font-label-md text-outline">Strategic Location</p>
+                <p class="font-body-md text-on-surface">Located near Delhi NCR with excellent industrial connectivity.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0">
+                <span class="material-symbols-outlined text-primary">domain</span>
+              </div>
+              <div>
+                <p class="font-label-md text-outline">Development Type</p>
+                <p class="font-body-md text-on-surface">Premium industrial plots for factory, warehouse, and logistics use.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0">
+                <span class="material-symbols-outlined text-primary">trending_up</span>
+              </div>
+              <div>
+                <p class="font-label-md text-outline">Investment Appeal</p>
+                <p class="font-body-md text-on-surface">Built for long-term appreciation, business expansion, and industrial growth.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl overflow-hidden h-[300px] shadow-[0_20px_40px_rgba(15,23,42,0.04)] relative">
+          <img
+            class="w-full h-full object-cover"
+            src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80"
+            alt="KJS Township business planning"
+          />
+          <div class="absolute inset-0 bg-primary/10"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision Mission -->
+    <section class="max-w-[1280px] mx-auto px-6 pb-section-gap">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+          <div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-primary">visibility</span>
+          </div>
+          <h3 class="font-headline-md text-on-background mb-4">Our Vision</h3>
+          <p class="text-slate-600 leading-7">
+            To create a future-ready industrial township that supports business growth, operational efficiency,
+            and long-term value in a prime developing region.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+          <div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-primary">flag</span>
+          </div>
+          <h3 class="font-headline-md text-on-background mb-4">Our Mission</h3>
+          <p class="text-slate-600 leading-7">
+            To offer strategically positioned industrial plots that help businesses establish, expand, and
+            invest with confidence in a professionally planned environment.
+          </p>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+          <div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-5">
+            <span class="material-symbols-outlined text-primary">handshake</span>
+          </div>
+          <h3 class="font-headline-md text-on-background mb-4">Our Promise</h3>
+          <p class="text-slate-600 leading-7">
+            We are committed to creating an industrial destination focused on transparency, location advantage,
+            planning quality, and long-term growth opportunity.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="max-w-[1280px] mx-auto px-6 pb-section-gap">
+      <div class="bg-surface-container p-10 rounded-xl border border-outline-variant/30">
+        <div class="max-w-3xl mb-10">
+          <p class="font-label-md uppercase tracking-[0.2em] text-outline mb-4">Why Choose KJS Township</p>
+          <h2 class="font-headline-lg text-on-background mb-4">Designed for Businesses That Think Long Term</h2>
+          <p class="text-slate-600 leading-8">
+            KJS Township is more than an industrial plot project. It is a strategic opportunity for businesses
+            and investors looking for the right mix of location, planning, growth, and long-term returns.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-white p-6 rounded-xl border border-slate-100">
+            <h4 class="font-semibold text-slate-900 mb-3">Prime Connectivity</h4>
+            <p class="text-slate-600 text-sm leading-6">Strong access to key industrial routes and the Delhi NCR region.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl border border-slate-100">
+            <h4 class="font-semibold text-slate-900 mb-3">Industrial Focused</h4>
+            <p class="text-slate-600 text-sm leading-6">Suitable for warehousing, manufacturing, logistics, and business expansion.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl border border-slate-100">
+            <h4 class="font-semibold text-slate-900 mb-3">Growth Potential</h4>
+            <p class="text-slate-600 text-sm leading-6">A project built with future appreciation and scalability in mind.</p>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl border border-slate-100">
+            <h4 class="font-semibold text-slate-900 mb-3">Planned Opportunity</h4>
+            <p class="text-slate-600 text-sm leading-6">A township concept that supports long-term industrial development goals.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map + Social -->
+    <section class="max-w-[1280px] mx-auto px-6 pb-section-gap grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-7 rounded-xl overflow-hidden h-[360px] shadow-[0_20px_40px_rgba(15,23,42,0.04)] relative">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1750.4084745231219!2d76.83145869663997!3d28.665199142851865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0d67009eb11b%3A0x996885e6d2c09eda!2sKJS%20Township!5e0!3m2!1sen!2sin!4v1776933267262!5m2!1sen!2sin"
+          class="w-full h-full border-0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+
+        <div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
+
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+          <div class="relative">
+            <div class="absolute -inset-4 bg-primary/20 rounded-full animate-ping"></div>
+            <span class="material-symbols-outlined text-primary text-4xl relative z-10" style="font-variation-settings: 'FILL' 1;">
+              location_on
+            </span>
+          </div>
+        </div>
+
+        <a href="https://www.google.com/maps?q=KJS+Township" target="_blank">
+          <div class="absolute bottom-4 right-4 bg-white px-4 py-2 rounded-lg shadow-md font-label-md text-xs cursor-pointer">
+            Open in Google Maps
+          </div>
+        </a>
+      </div>
+
+      <div class="lg:col-span-5 space-y-8">
+        <div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+          <h3 class="font-headline-md text-on-background mb-5">Connect With Us</h3>
+          <p class="text-slate-600 leading-7 mb-6">
+            Follow KJS Township to stay updated with project highlights, industrial investment opportunities,
+            and location-driven growth updates.
+          </p>
+
+          <div class="flex gap-4">
+            <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
+              <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+                <i class="fa-brands fa-facebook-f text-[20px]"></i>
+              </div>
+            </a>
+
+            <a href="https://www.instagram.com/kjstownshipofficial/" target="_blank">
+              <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+                <i class="fa-brands fa-instagram text-[20px]"></i>
+              </div>
+            </a>
+
+            <div onclick="sharePage()" class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[20px]">share</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-on-background p-8 rounded-xl text-on-primary">
+          <h3 class="font-headline-md mb-4">Build Your Business, Not Just Buy Land</h3>
+          <p class="text-slate-300 leading-7 mb-6">
+            Explore a location where industrial planning meets long-term potential. KJS Township is positioned
+            for the future of business expansion.
+          </p>
+          <button class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-lg font-label-md hover:bg-secondary-fixed transition-colors">
+            Schedule a Visit
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-50 border-t border-slate-200 py-12 font-manrope">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1280px] mx-auto px-6">
+      <div class="space-y-4">
+        <div class="text-xl font-bold text-slate-900">KJS Township</div>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          KJS Township is a future-ready industrial destination built for long-term growth and opportunity.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Explore</h4>
+        <ul class="space-y-2 text-sm text-slate-500">
+          <li><a class="hover:text-slate-900 transition-colors" href="index.html">Home</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="about us.html">About Us</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="blog.html">Blog</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Legal</h4>
+        <ul class="space-y-2 text-sm text-slate-500">
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Privacy Policy</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Terms of Service</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Cookie Policy</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Sitemap</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Follow Us</h4>
+        <div class="flex gap-4">
+          <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+              <i class="fa-brands fa-facebook-f text-[20px]"></i>
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com/kjstownshipofficial/" target="_blank">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+              <i class="fa-brands fa-instagram text-[20px]"></i>
+            </div>
+          </a>
+
+          <div onclick="sharePage()" class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">share</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-[1280px] mx-auto px-6 mt-12 pt-8 border-t border-slate-200 text-center text-slate-500 text-sm flex justify-center">
+      <span>© 2026 KJS Township all rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({
+          title: "KJS Township",
+          text: "Check out this industrial project",
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert("Link copied!");
+      }
+    }
+  </script>
+
+  <script>
+    const dot = document.getElementById("cursor-dot");
+    const trailContainer = document.getElementById("cursor-trail-container");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let dotX = mouseX - 25;
+    let dotY = mouseY - 25;
+
+    let lastMouseX = mouseX;
+    let lastMouseY = mouseY;
+    let speed = 0;
+
+    const gap = 25;
+    const smooth = 0.18;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      const dx = mouseX - lastMouseX;
+      const dy = mouseY - lastMouseY;
+      speed = Math.sqrt(dx * dx + dy * dy);
+
+      if (speed > 8) {
+        createTrail(dotX, dotY);
+      }
+
+      lastMouseX = mouseX;
+      lastMouseY = mouseY;
+    });
+
+    function animateDot() {
+      let dx = mouseX - dotX;
+      let dy = mouseY - dotY;
+      let distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance > gap) {
+        let targetX = mouseX - (dx / distance) * gap;
+        let targetY = mouseY - (dy / distance) * gap;
+
+        dotX += (targetX - dotX) * smooth;
+        dotY += (targetY - dotY) * smooth;
+      }
+
+      dot.style.left = dotX + "px";
+      dot.style.top = dotY + "px";
+
+      const stretch = Math.min(speed * 0.02, 0.5);
+      dot.style.transform = `translate(-50%, -50%) scale(${1 + stretch}, ${1 - stretch * 0.25})`;
+
+      speed *= 0.90;
+
+      requestAnimationFrame(animateDot);
+    }
+
+    function createTrail(x, y) {
+      const trail = document.createElement("div");
+      trail.className = "trail-dot";
+      trail.style.left = x + "px";
+      trail.style.top = y + "px";
+      trailContainer.appendChild(trail);
+
+      setTimeout(() => {
+        trail.remove();
+      }, 450);
+    }
+
+    animateDot();
+  </script>
+
+  <script>
+const path = window.location.pathname;
+
+if (path.includes("about.html")) {
+  document.getElementById("aboutLink").classList.add("text-slate-900","font-semibold","border-b-2","border-slate-900","pb-1");
+}
+
+if (path.includes("contact.html")) {
+  document.getElementById("contactLink").classList.add("text-slate-900","font-semibold","border-b-2","border-slate-900","pb-1");
+}
+</script>
+</body>
+</html>
