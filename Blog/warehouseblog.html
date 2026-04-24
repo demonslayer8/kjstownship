@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Warehouse, Factory or Logistics Hub? - KJS Township</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      font-family: Manrope, sans-serif;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(rgba(11, 28, 48, 0.76), rgba(11, 28, 48, 0.76));
+    }
+
+    #cursor-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: black;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.18);
+    }
+
+    #cursor-trail-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .trail-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: trailFade 0.45s ease-out forwards;
+    }
+
+    @keyframes trailFade {
+      0% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+      }
+    }
+
+    @media (max-width: 768px) {
+      #cursor-dot,
+      #cursor-trail-container {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-[#f8f9ff] text-[#0b1c30] antialiased">
+  <div id="cursor-dot"></div>
+  <div id="cursor-trail-container"></div>
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+    <div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-20">
+
+      <div class="flex items-center">
+        <div class="bg-white border border-slate-200 px-6 py-2 rounded-lg shadow-sm flex items-center">
+          <img src="../img/logo.png" alt="KJS Township Logo" class="h-12 w-auto object-contain">
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-8">
+        <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../index.html">Home</a>
+        <a class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1" href="../blog.html">Blog</a>
+        <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../gallery.html">Gallery</a>
+        <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../about us.html">About Us</a>
+        <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../contact.html">Contact</a>
+      </div>
+
+      <a href="../contact.html" class="hidden md:block bg-black text-white px-6 py-3 rounded-lg text-sm font-semibold hover:opacity-80 transition-all">
+        Book a Visit
+      </a>
+
+      <button onclick="toggleMenu()" class="md:hidden text-slate-900">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="hidden fixed top-20 left-0 w-full bg-white z-[999] border-b border-slate-100 shadow-lg md:hidden">
+    <div class="flex flex-col px-6 py-5 space-y-4">
+      <a class="text-slate-700" href="../index.html">Home</a>
+      <a class="text-slate-900 font-semibold" href="../blog.html">Blog</a>
+      <a class="text-slate-700" href="../gallery.html">Gallery</a>
+      <a class="text-slate-700" href="../about us.html">About Us</a>
+      <a class="text-slate-700" href="../contact.html">Contact</a>
+      <a class="bg-black text-white px-6 py-3 rounded-lg text-center" href="../contact.html">Book a Visit</a>
+    </div>
+  </div>
+
+  <main class="pt-20">
+
+    <!-- HERO -->
+    <section class="relative h-[460px] flex items-center justify-center overflow-hidden">
+      <img 
+        src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?fm=jpg&q=60&w=1600&fit=max"
+        alt="Warehouse factory logistics hub"
+        class="absolute inset-0 w-full h-full object-cover"
+      >
+      <div class="absolute inset-0 hero-gradient"></div>
+
+      <div class="relative z-10 text-center px-6 max-w-4xl">
+        <p class="uppercase tracking-[0.2em] text-sm font-semibold text-slate-300 mb-4">
+          Warehouse Strategy
+        </p>
+        <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+          Warehouse, Factory or Logistics Hub?
+        </h1>
+        <p class="text-slate-200 text-lg leading-8 max-w-3xl mx-auto">
+          What should you build on industrial land to create income, growth, and long-term value?
+        </p>
+      </div>
+    </section>
+
+    <!-- ARTICLE -->
+    <section class="max-w-[1280px] mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+      <!-- MAIN ARTICLE -->
+      <article class="lg:col-span-8 bg-white rounded-xl p-8 md:p-12 shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+
+        <div class="flex flex-wrap gap-4 mb-8 text-sm text-slate-500">
+          <span class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+            April 2026
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">schedule</span>
+            4 min read
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">category</span>
+            Warehouse Strategy
+          </span>
+        </div>
+
+        <div class="space-y-8 text-slate-600 leading-8 text-[17px]">
+
+          <p>
+            Buying industrial land is a smart move, but the real game starts after that.
+          </p>
+
+          <p>
+            The biggest question is simple — <strong class="text-slate-900">what will you build on it?</strong>
+          </p>
+
+          <p>
+            A warehouse, a factory, or a logistics hub — each one has a different purpose, different income potential, and different long-term value.
+          </p>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">Warehouse, Factory or Logistics Hub: What Should You Build?</h2>
+
+          <p>
+            If you think about industrial land seriously, the structure you build decides how your investment performs.
+          </p>
+
+          <div class="bg-slate-50 border border-slate-100 rounded-xl p-6">
+            <ul class="space-y-3 text-slate-700">
+              <li class="flex gap-3"><span class="material-symbols-outlined text-black">warehouse</span> Warehouse for steady rental income</li>
+              <li class="flex gap-3"><span class="material-symbols-outlined text-black">factory</span> Factory for business growth</li>
+              <li class="flex gap-3"><span class="material-symbols-outlined text-black">local_shipping</span> Logistics hub for future expansion</li>
+            </ul>
+          </div>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">1. Warehouse – Stable Income with Less Stress</h2>
+
+          <p>
+            A warehouse is the easiest option if your goal is steady income. With the rise of e-commerce and storage demand, warehouses are always needed.
+          </p>
+
+          <p>
+            You can lease it out and enjoy regular rental without too much stress.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white border border-slate-100 rounded-xl p-6 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+              <h3 class="font-bold text-slate-900 mb-3">Steady Rent</h3>
+              <p class="text-sm leading-7">Warehouses can create regular rental income for investors.</p>
+            </div>
+
+            <div class="bg-white border border-slate-100 rounded-xl p-6 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+              <h3 class="font-bold text-slate-900 mb-3">High Demand</h3>
+              <p class="text-sm leading-7">E-commerce, storage, and distribution businesses need space.</p>
+            </div>
+
+            <div class="bg-white border border-slate-100 rounded-xl p-6 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+              <h3 class="font-bold text-slate-900 mb-3">Less Hassle</h3>
+              <p class="text-sm leading-7">Compared to running a business, leasing can be easier to manage.</p>
+            </div>
+          </div>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">2. Factory – For People Who Want to Go Bigger</h2>
+
+          <p>
+            A factory is for people who want to go bigger. It is not just an investment, it is a business.
+          </p>
+
+          <p>
+            It takes effort, planning, manpower, and execution, but the profit potential can be much higher if you plan it right.
+          </p>
+
+          <ul class="space-y-4">
+            <li class="flex gap-3">
+              <span class="material-symbols-outlined text-black">check_circle</span>
+              Suitable for manufacturing businesses
+            </li>
+            <li class="flex gap-3">
+              <span class="material-symbols-outlined text-black">check_circle</span>
+              Higher growth potential than passive rental
+            </li>
+            <li class="flex gap-3">
+              <span class="material-symbols-outlined text-black">check_circle</span>
+              Better for people who want business control
+            </li>
+          </ul>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">3. Logistics Hub – Where the Future Is Heading</h2>
+
+          <p>
+            Then comes the logistics hub — this is where the future is heading.
+          </p>
+
+          <p>
+            Everything today depends on fast delivery, smooth movement, and strong supply chains. Because of this, logistics spaces are becoming extremely valuable.
+          </p>
+
+          <p>
+            It is more of a long-term and large-scale play, but the future potential can be powerful.
+          </p>
+
+          <div class="bg-slate-50 border border-slate-100 rounded-xl p-6">
+            <ul class="space-y-3 text-slate-700">
+              <li class="flex gap-3"><span class="material-symbols-outlined text-black">local_shipping</span> Supports fast delivery movement</li>
+              <li class="flex gap-3"><span class="material-symbols-outlined text-black">hub</span> Useful for supply chain operations</li>
+              <li class="flex gap-3"><span class="material-symbols-outlined text-black">trending_up</span> Strong long-term growth potential</li>
+            </ul>
+          </div>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">Simple Decision Rule</h2>
+
+          <p>
+            If you think about it simply, your goal should decide your structure.
+          </p>
+
+          <div class="bg-[#0b1c30] text-white rounded-xl p-8">
+            <h3 class="text-2xl font-bold mb-5">Choose Based on Your Goal</h3>
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-4 text-slate-200">
+              <p class="flex gap-3"><span class="material-symbols-outlined">payments</span> If you want stable income, go with a warehouse.</p>
+              <p class="flex gap-3"><span class="material-symbols-outlined">factory</span> If you want to run and grow a business, a factory makes sense.</p>
+              <p class="flex gap-3"><span class="material-symbols-outlined">local_shipping</span> If you are aiming for future expansion and bigger returns, logistics is the smart move.</p>
+            </div>
+          </div>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">But Here’s What Most People Ignore</h2>
+
+          <p>
+            Even the best plan fails in the wrong location.
+          </p>
+
+          <p>
+            That’s why 
+            <a href="../contact.html" class="text-blue-600 font-bold hover:underline">
+              KJS Township
+            </a> 
+            stands out.
+          </p>
+
+          <p>
+            It is not just land. It is a location that supports all three options — warehouse, factory, and logistics hub.
+          </p>
+
+          <p>
+            With strong connectivity near Delhi NCR and growing industrial demand, you are not limited to one use. You have flexibility.
+          </p>
+
+          <div class="bg-[#0b1c30] text-white rounded-xl p-8">
+            <h3 class="text-2xl font-bold mb-5">KJS Township Advantage</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-200">
+              <p class="flex gap-3"><span class="material-symbols-outlined">verified</span> Supports multiple industrial uses</p>
+              <p class="flex gap-3"><span class="material-symbols-outlined">location_on</span> Near Delhi NCR growth zone</p>
+              <p class="flex gap-3"><span class="material-symbols-outlined">route</span> Strong connectivity advantage</p>
+              <p class="flex gap-3"><span class="material-symbols-outlined">trending_up</span> Growing industrial demand</p>
+            </div>
+          </div>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">Final Thought</h2>
+
+          <p>
+            In the end, it is not about choosing warehouse, factory, or logistics.
+          </p>
+
+          <p>
+            It is about choosing what fits your goal and making sure your land supports that decision.
+          </p>
+
+          <p>
+            The right land gives you flexibility. The right location gives you power.
+          </p>
+
+        </div>
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="lg:col-span-4 space-y-8">
+
+        <div class="bg-white p-8 rounded-xl border border-slate-50 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Need Help Choosing the Right Use?</h3>
+          <p class="text-slate-600 leading-7 mb-6">
+            Talk to our team and understand whether warehouse, factory, or logistics use fits your investment goal.
+          </p>
+          <a href="../contact.html" class="block text-center bg-black text-white px-6 py-3 rounded-lg font-semibold hover:opacity-80 transition-all">
+            Book a Site Visit
+          </a>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl border border-slate-50 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+          <h3 class="text-xl font-bold text-slate-900 mb-5">Quick Highlights</h3>
+          <div class="space-y-4">
+            <p class="flex gap-3 text-slate-600"><span class="material-symbols-outlined text-black">warehouse</span> Warehouse for rental income</p>
+            <p class="flex gap-3 text-slate-600"><span class="material-symbols-outlined text-black">factory</span> Factory for business growth</p>
+            <p class="flex gap-3 text-slate-600"><span class="material-symbols-outlined text-black">local_shipping</span> Logistics for future expansion</p>
+            <p class="flex gap-3 text-slate-600"><span class="material-symbols-outlined text-black">location_on</span> Location decides success</p>
+          </div>
+        </div>
+
+        <div class="bg-[#0b1c30] p-8 rounded-xl text-white">
+          <h3 class="text-2xl font-bold mb-4">Build Smart on the Right Land</h3>
+          <p class="text-slate-300 leading-7 mb-6">
+            Explore a project that supports warehouse, factory, and logistics possibilities with long-term potential.
+          </p>
+          <a href="../contact.html" class="inline-block bg-white text-slate-900 px-6 py-3 rounded-lg font-semibold">
+            Get Project Details
+          </a>
+        </div>
+
+      </aside>
+    </section>
+
+    <!-- CTA -->
+    <section class="max-w-[1280px] mx-auto px-6 pb-20">
+      <div class="bg-[#0b1c30] p-12 rounded-xl text-white text-center">
+        <p class="uppercase tracking-[0.2em] text-sm text-slate-400 mb-4">Take the Next Step</p>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Explore KJS Township?</h2>
+        <p class="text-slate-300 max-w-2xl mx-auto leading-8 mb-8">
+          Book a site visit, talk to our team, or get complete project details for your industrial investment decision.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="../contact.html" class="px-6 py-3 rounded-lg border border-white/20 text-white hover:bg-white hover:text-slate-900 transition-all">
+            Book a Site Visit
+          </a>
+          <a href="../contact.html" class="px-6 py-3 rounded-lg border border-white/20 text-white hover:bg-white hover:text-slate-900 transition-all">
+            Talk to Our Team
+          </a>
+          <a href="#" class="px-6 py-3 rounded-lg border border-white/20 text-white hover:bg-white hover:text-slate-900 transition-all">
+            Download Brochure
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-50 border-t border-slate-200 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1280px] mx-auto px-6">
+      <div class="space-y-4">
+        <div class="text-xl font-bold text-slate-900">KJS Township</div>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          KJS Township is a future-ready industrial destination built for long-term growth and opportunity.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Explore</h4>
+        <ul class="space-y-2 text-sm text-slate-500">
+          <li><a class="hover:text-slate-900" href="../index.html">Home</a></li>
+          <li><a class="hover:text-slate-900" href="../blog.html">Blog</a></li>
+          <li><a class="hover:text-slate-900" href="../gallery.html">Gallery</a></li>
+          <li><a class="hover:text-slate-900" href="../about us.html">About Us</a></li>
+          <li><a class="hover:text-slate-900" href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Legal</h4>
+        <ul class="space-y-2 text-sm text-slate-500">
+          <li><a class="hover:text-slate-900" href="#">Privacy Policy</a></li>
+          <li><a class="hover:text-slate-900" href="#">Terms of Service</a></li>
+          <li><a class="hover:text-slate-900" href="#">Cookie Policy</a></li>
+          <li><a class="hover:text-slate-900" href="#">Sitemap</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Follow Us</h4>
+        <div class="flex gap-4">
+          <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all">
+              <i class="fa-brands fa-facebook-f text-[20px]"></i>
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com/kjstownshipofficial/" target="_blank">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all">
+              <i class="fa-brands fa-instagram text-[20px]"></i>
+            </div>
+          </a>
+
+          <div onclick="sharePage()" class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">share</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-[1280px] mx-auto px-6 mt-12 pt-8 border-t border-slate-200 text-center text-slate-500 text-sm flex justify-center">
+      <span>© 2026 KJS Township all rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({
+          title: "KJS Township",
+          text: "Check out this industrial project",
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert("Link copied!");
+      }
+    }
+  </script>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("mobileMenu").classList.toggle("hidden");
+    }
+  </script>
+
+  <script>
+    const dot = document.getElementById("cursor-dot");
+    const trailContainer = document.getElementById("cursor-trail-container");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let dotX = mouseX - 25;
+    let dotY = mouseY - 25;
+
+    let lastMouseX = mouseX;
+    let lastMouseY = mouseY;
+    let speed = 0;
+
+    const gap = 25;
+    const smooth = 0.18;
+
+    if (window.innerWidth > 768) {
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        const dx = mouseX - lastMouseX;
+        const dy = mouseY - lastMouseY;
+        speed = Math.sqrt(dx * dx + dy * dy);
+
+        if (speed > 8) {
+          createTrail(dotX, dotY);
+        }
+
+        lastMouseX = mouseX;
+        lastMouseY = mouseY;
+      });
+
+      function animateDot() {
+        let dx = mouseX - dotX;
+        let dy = mouseY - dotY;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance > gap) {
+          let targetX = mouseX - (dx / distance) * gap;
+          let targetY = mouseY - (dy / distance) * gap;
+
+          dotX += (targetX - dotX) * smooth;
+          dotY += (targetY - dotY) * smooth;
+        }
+
+        dot.style.left = dotX + "px";
+        dot.style.top = dotY + "px";
+
+        const stretch = Math.min(speed * 0.02, 0.5);
+        dot.style.transform = `translate(-50%, -50%) scale(${1 + stretch}, ${1 - stretch * 0.25})`;
+
+        speed *= 0.90;
+
+        requestAnimationFrame(animateDot);
+      }
+
+      function createTrail(x, y) {
+        const trail = document.createElement("div");
+        trail.className = "trail-dot";
+        trail.style.left = x + "px";
+        trail.style.top = y + "px";
+        trailContainer.appendChild(trail);
+
+        setTimeout(() => {
+          trail.remove();
+        }, 450);
+      }
+
+      animateDot();
+    }
+  </script>
+</body>
+</html>

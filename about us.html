@@ -149,62 +149,103 @@
       }
     }
   </style>
-
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-trail-container"></div>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <title>About Us - KJS Township</title>
 </head>
 
-<body class="bg-background font-body-md text-on-background antialiased">
-  <div id="cursor-dot"></div>
-  <div id="cursor-trail-container"></div>
-
-  <!-- Top Navigation Bar -->
- <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_20px_40px_rgba(15,23,42,0.04)] font-manrope">
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
   <div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-20">
 
     <!-- Logo -->
-   <div class="flex items-center">
-  <div class="bg-white border border-slate-200 px-6 py-2 rounded-lg shadow-sm flex items-center">
-    <img src="img/logo.pdf .png" alt="KJS Township Logo" class="h-12 w-auto object-contain">
-  </div>
-</div>
+    <div class="flex items-center">
+      <div class="bg-white border border-slate-200 px-6 py-2 rounded-lg shadow-sm flex items-center">
+        <img src="img/logo.png" alt="KJS Township Logo" class="h-12 w-auto object-contain">
+      </div>
+    </div>
 
-    <!-- Menu -->
+    <!-- Desktop Menu -->
     <div class="hidden md:flex items-center space-x-8">
 
-      <a class="text-slate-500 hover:text-slate-900 transition-colors" href="index.html">
+      <!-- Home -->
+      <a href="index.html"
+         class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">
         Home
       </a>
 
-      <a class="text-slate-500 hover:text-slate-900 transition-colors" href="blog.html">
+      <!-- Blog -->
+      <a href="blog.html"
+         class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">
         Blog
       </a>
 
-      <a class="text-slate-500 hover:text-slate-900 transition-colors" href="#">
-        Investment
+      <!-- Investment -->
+      <a href="gallery.html"
+         class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">
+        Gallery
       </a>
 
-      <!-- About -->
-      <a id="aboutLink" class="text-slate-500 hover:text-slate-900 transition-colors" href="about us.html">
+      <!-- Active About -->
+      <a href="about us.html"
+         class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1">
         About Us
       </a>
 
       <!-- Contact -->
-      <a id="contactLink" class="text-slate-500 hover:text-slate-900 transition-colors" href="contact.html">
+      <a href="contact.html"
+         class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">
         Contact
       </a>
 
     </div>
 
     <!-- Button -->
-    <button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-label-md active:scale-95 transition-all hover:opacity-80">
+    <a href="contact.html"
+       class="hidden md:block bg-black text-white px-6 py-3 rounded-lg text-sm font-semibold hover:opacity-80 transition-all">
       Book a Visit
+    </a>
+
+    <!-- Mobile Button -->
+    <button onclick="toggleMenu()" class="md:hidden text-slate-900">
+      <span class="material-symbols-outlined text-3xl">menu</span>
     </button>
 
   </div>
 </nav>
 
-<main class="pt-20">
+<!-- Mobile Menu -->
+<div id="mobileMenu" class="hidden fixed top-20 left-0 w-full bg-white z-[999] border-b border-slate-100 shadow-lg md:hidden">
+  <div class="flex flex-col px-6 py-5 space-y-4">
+
+    <a class="text-slate-700 hover:text-slate-900" href="index.html">
+      Home
+    </a>
+
+    <a class="text-slate-700 hover:text-slate-900" href="blog.html">
+      Blog
+    </a>
+
+    <a class="text-slate-700 hover:text-slate-900" href="gallery.html">
+      Gallery
+    </a>
+
+    <!-- Active About -->
+    <a class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1" href="about us.html">
+      About Us
+    </a>
+
+    <a class="text-slate-700 hover:text-slate-900" href="contact.html">
+      Contact
+    </a>
+
+    <a class="bg-black text-white px-6 py-3 rounded-lg text-center" href="contact.html">
+      Book a Visit
+    </a>
+
+  </div>
+</div>
     <!-- Hero Section -->
     <section class="relative h-[400px] flex items-center justify-center overflow-hidden">
     <img 
@@ -296,44 +337,7 @@
       </div>
     </section>
 
-    <!-- Vision Mission -->
-    <section class="max-w-[1280px] mx-auto px-6 pb-section-gap">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
-          <div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-primary">visibility</span>
-          </div>
-          <h3 class="font-headline-md text-on-background mb-4">Our Vision</h3>
-          <p class="text-slate-600 leading-7">
-            To create a future-ready industrial township that supports business growth, operational efficiency,
-            and long-term value in a prime developing region.
-          </p>
-        </div>
-
-        <div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
-          <div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-primary">flag</span>
-          </div>
-          <h3 class="font-headline-md text-on-background mb-4">Our Mission</h3>
-          <p class="text-slate-600 leading-7">
-            To offer strategically positioned industrial plots that help businesses establish, expand, and
-            invest with confidence in a professionally planned environment.
-          </p>
-        </div>
-
-        <div class="bg-white p-8 rounded-xl shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
-          <div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center mb-5">
-            <span class="material-symbols-outlined text-primary">handshake</span>
-          </div>
-          <h3 class="font-headline-md text-on-background mb-4">Our Promise</h3>
-          <p class="text-slate-600 leading-7">
-            We are committed to creating an industrial destination focused on transparency, location advantage,
-            planning quality, and long-term growth opportunity.
-          </p>
-        </div>
-      </div>
-    </section>
-
+   
     <!-- Why Choose Us -->
     <section class="max-w-[1280px] mx-auto px-6 pb-section-gap">
       <div class="bg-surface-container p-10 rounded-xl border border-outline-variant/30">
@@ -592,6 +596,19 @@ if (path.includes("about.html")) {
 
 if (path.includes("contact.html")) {
   document.getElementById("contactLink").classList.add("text-slate-900","font-semibold","border-b-2","border-slate-900","pb-1");
+}
+</script>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+  }
+</script>
+
+<script>
+if (window.innerWidth <= 768) {
+  document.getElementById("cursor-dot").style.display = "none";
+  document.getElementById("cursor-trail-container").style.display = "none";
 }
 </script>
 </body>

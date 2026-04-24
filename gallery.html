@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery - KJS Township</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#0b1c30",
+            "tertiary-container": "#002201",
+            "surface-bright": "#f8f9ff",
+            "primary-fixed": "#dae2fd",
+            "on-secondary-fixed-variant": "#5e4200",
+            "secondary-fixed-dim": "#ecc070",
+            "secondary": "#795911",
+            "outline-variant": "#c6c6cd",
+            "on-tertiary-fixed": "#002201",
+            "on-secondary-container": "#785810",
+            "on-primary": "#ffffff",
+            "secondary-fixed": "#ffdea6",
+            "on-primary-container": "#7c839b",
+            "on-tertiary-fixed-variant": "#23501e",
+            "surface-variant": "#d3e4fe",
+            "on-error": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed-variant": "#3f465c",
+            "on-tertiary-container": "#609056",
+            "surface": "#f8f9ff",
+            "tertiary-fixed": "#bcf0ae",
+            "inverse-primary": "#bec6e0",
+            "surface-container-low": "#eff4ff",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#fed17f",
+            "surface-container": "#e5eeff",
+            "on-primary-fixed": "#131b2e",
+            "surface-tint": "#565e74",
+            "surface-container-high": "#dce9ff",
+            "tertiary": "#000000",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#d3e4fe",
+            "error": "#ba1a1a",
+            "primary-fixed-dim": "#bec6e0",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#a1d494",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#76777d",
+            "on-surface-variant": "#45464d",
+            "inverse-on-surface": "#eaf1ff",
+            "background": "#f8f9ff",
+            "primary-container": "#131b2e",
+            "on-surface": "#0b1c30",
+            "inverse-surface": "#213145",
+            "primary": "#000000",
+            "surface-dim": "#cbdbf5",
+            "on-secondary-fixed": "#271900"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          spacing: {
+            "base": "8px",
+            "section-gap": "80px",
+            "stack-lg": "32px",
+            "margin": "32px",
+            "container-max": "1280px",
+            "stack-sm": "8px",
+            "stack-md": "16px",
+            "gutter": "24px"
+          },
+          fontFamily: {
+            "body-lg": ["Manrope"],
+            "label-md": ["Manrope"],
+            "body-md": ["Manrope"],
+            "headline-xl": ["Manrope"],
+            "headline-md": ["Manrope"],
+            "headline-lg": ["Manrope"]
+          },
+          fontSize: {
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+  body {
+    font-family: Manrope, sans-serif;
+  }
+</style>
+
+  <style>
+    body { font-family: Manrope, sans-serif; }
+
+    .hero-gradient {
+      background: linear-gradient(rgba(11, 28, 48, 0.72), rgba(11, 28, 48, 0.72));
+    }
+
+    #cursor-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: black;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 12px rgba(0,0,0,0.18);
+    }
+
+    #cursor-trail-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .trail-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: rgba(0,0,0,0.18);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: trailFade 0.45s ease-out forwards;
+    }
+
+    @keyframes trailFade {
+      0% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+    }
+
+    @media (max-width: 768px) {
+      #cursor-dot,
+      #cursor-trail-container {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-[#f8f9ff] text-[#0b1c30] antialiased">
+
+<div id="cursor-dot"></div>
+<div id="cursor-trail-container"></div>
+
+<!-- NAVBAR -->
+<!-- NAVBAR -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+  <div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-20">
+
+    <!-- Logo -->
+    <div class="flex items-center">
+      <div class="bg-white border border-slate-200 px-6 py-2 rounded-lg shadow-sm flex items-center">
+        <img src="img/logo.png" alt="KJS Township Logo" class="h-12 w-auto object-contain">
+      </div>
+    </div>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center space-x-8">
+      <a href="index.html" class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">Home</a>
+      <a href="blog.html" class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">Blog</a>
+      <a href="gallery.html" class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1">Gallery</a>
+      <a href="about us.html" class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">About Us</a>
+      <a href="contact.html" class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">Contact</a>
+    </div>
+
+    <!-- Button -->
+    <a href="contact.html" class="hidden md:block bg-black text-white px-6 py-3 rounded-lg text-sm font-semibold hover:opacity-80 transition-all">
+      Book a Visit
+    </a>
+
+    <!-- Mobile Button -->
+    <button onclick="toggleMenu()" class="md:hidden text-slate-900">
+      <span class="material-symbols-outlined text-3xl">menu</span>
+    </button>
+
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobileMenu" class="hidden fixed top-20 left-0 w-full bg-white z-[999] border-b border-slate-100 shadow-lg md:hidden">
+  <div class="flex flex-col px-6 py-5 space-y-4">
+    <a class="text-slate-700" href="index.html">Home</a>
+    <a class="text-slate-700" href="blog.html">Blog</a>
+    <a class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1" href="gallery.html">Gallery</a>
+    <a class="text-slate-700" href="about us.html">About Us</a>
+    <a class="text-slate-700" href="contact.html">Contact</a>
+    <a class="bg-black text-white px-6 py-3 rounded-lg text-center" href="contact.html">Book a Visit</a>
+  </div>
+</div>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+  }
+</script>
+
+  <!-- HERO -->
+  <section class="relative h-[400px] flex items-center justify-center overflow-hidden">
+    <img 
+      src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?fm=jpg&q=60&w=1600&fit=max"
+      alt="KJS Township Gallery"
+      class="absolute inset-0 w-full h-full object-cover"
+    >
+    <div class="absolute inset-0 hero-gradient"></div>
+
+    <div class="relative z-10 text-center px-6">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Project Gallery</h1>
+      <p class="text-slate-200 text-lg max-w-3xl mx-auto leading-8">
+        Explore visuals of KJS Township, industrial opportunities, business infrastructure, and future-ready development.
+      </p>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="max-w-[1280px] mx-auto px-6 py-20">
+    <div class="mb-12 text-center">
+      <p class="uppercase tracking-[0.2em] text-sm font-semibold text-slate-500 mb-4">Project Visuals</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Site Gallery</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="bg-white rounded-xl overflow-hidden border border-slate-50 shadow-[0_20px_40px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)]">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?fm=jpg&q=60&w=1200&fit=max" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-5">
+          <h3 class="font-semibold text-slate-900 mb-2">Industrial Plot View</h3>
+          <p class="text-slate-600 text-sm leading-6">Planned space designed for industrial growth.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl overflow-hidden border border-slate-50 shadow-[0_20px_40px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)]">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?fm=jpg&q=60&w=1200&fit=max" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-5">
+          <h3 class="font-semibold text-slate-900 mb-2">Warehouse Potential</h3>
+          <p class="text-slate-600 text-sm leading-6">Ideal for warehouse, factory, and logistics use.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl overflow-hidden border border-slate-50 shadow-[0_20px_40px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)]">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fm=jpg&q=60&w=1200&fit=max" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-5">
+          <h3 class="font-semibold text-slate-900 mb-2">Business Expansion</h3>
+          <p class="text-slate-600 text-sm leading-6">A strong destination for long-term operations.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl overflow-hidden border border-slate-50 shadow-[0_20px_40px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)]">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?fm=jpg&q=60&w=1200&fit=max" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-5">
+          <h3 class="font-semibold text-slate-900 mb-2">Planned Development</h3>
+          <p class="text-slate-600 text-sm leading-6">Thoughtfully positioned for industrial usability.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl overflow-hidden border border-slate-50 shadow-[0_20px_40px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)]">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?fm=jpg&q=60&w=1200&fit=max" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-5">
+          <h3 class="font-semibold text-slate-900 mb-2">Industrial Opportunity</h3>
+          <p class="text-slate-600 text-sm leading-6">Suitable for warehousing and manufacturing.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl overflow-hidden border border-slate-50 shadow-[0_20px_40px_rgba(15,23,42,0.04)] transition-all duration-300 hover:-translate-y-3 hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(15,23,42,0.15)]">
+        <div class="overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?fm=jpg&q=60&w=1200&fit=max" class="w-full h-64 object-cover transition-transform duration-500 hover:scale-110">
+        </div>
+        <div class="p-5">
+          <h3 class="font-semibold text-slate-900 mb-2">Future Growth Zone</h3>
+          <p class="text-slate-600 text-sm leading-6">Strong potential for industrial demand.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-[1280px] mx-auto px-6 pb-20">
+    <div class="bg-[#0b1c30] p-12 rounded-xl text-white text-center">
+      <p class="uppercase tracking-[0.2em] text-sm text-slate-400 mb-4">Take the Next Step</p>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Want to Visit KJS Township?</h2>
+      <p class="text-slate-300 max-w-2xl mx-auto leading-8 mb-8">
+        Book a site visit and explore the location, layout, and industrial potential in person.
+      </p>
+
+      <a href="contact.html" class="inline-block px-6 py-3 rounded-lg border border-white/20 text-white hover:bg-white hover:text-slate-900 transition-all">
+        Book a Site Visit
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-slate-50 border-t border-slate-200 py-12">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1280px] mx-auto px-6">
+    <div class="space-y-4">
+      <div class="text-xl font-bold text-slate-900">KJS Township</div>
+      <p class="text-slate-500 text-sm leading-relaxed">
+        KJS Township is a future-ready industrial destination built for long-term growth and opportunity.
+      </p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold text-slate-900 mb-4">Explore</h4>
+      <ul class="space-y-2 text-sm text-slate-500">
+        <li><a class="hover:text-slate-900" href="index.html">Home</a></li>
+        <li><a class="hover:text-slate-900" href="blog.html">Blog</a></li>
+        <li><a class="hover:text-slate-900" href="gallery.html">Gallery</a></li>
+        <li><a class="hover:text-slate-900" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="font-semibold text-slate-900 mb-4">Legal</h4>
+      <ul class="space-y-2 text-sm text-slate-500">
+        <li><a class="hover:text-slate-900" href="#">Privacy Policy</a></li>
+        <li><a class="hover:text-slate-900" href="#">Terms of Service</a></li>
+        <li><a class="hover:text-slate-900" href="#">Cookie Policy</a></li>
+        <li><a class="hover:text-slate-900" href="#">Sitemap</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="font-semibold text-slate-900 mb-4">Follow Us</h4>
+      <div class="flex gap-4">
+        <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
+          <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all">
+            <i class="fa-brands fa-facebook-f text-[20px]"></i>
+          </div>
+        </a>
+
+        <a href="https://www.instagram.com/kjstownshipofficial/" target="_blank">
+          <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all">
+            <i class="fa-brands fa-instagram text-[20px]"></i>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-[1280px] mx-auto px-6 mt-12 pt-8 border-t border-slate-200 text-center text-slate-500 text-sm flex justify-center">
+    <span>© 2026 KJS Township all rights reserved.</span>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+  }
+</script>
+
+<script>
+if (window.innerWidth > 768) {
+  const dot = document.getElementById("cursor-dot");
+  const trailContainer = document.getElementById("cursor-trail-container");
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let dotX = mouseX - 25;
+  let dotY = mouseY - 25;
+  let lastMouseX = mouseX;
+  let lastMouseY = mouseY;
+  let speed = 0;
+
+  const gap = 25;
+  const smooth = 0.18;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    const dx = mouseX - lastMouseX;
+    const dy = mouseY - lastMouseY;
+    speed = Math.sqrt(dx * dx + dy * dy);
+
+    if (speed > 8) createTrail(dotX, dotY);
+
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
+  });
+
+  function animateDot() {
+    let dx = mouseX - dotX;
+    let dy = mouseY - dotY;
+    let distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance > gap) {
+      let targetX = mouseX - (dx / distance) * gap;
+      let targetY = mouseY - (dy / distance) * gap;
+      dotX += (targetX - dotX) * smooth;
+      dotY += (targetY - dotY) * smooth;
+    }
+
+    dot.style.left = dotX + "px";
+    dot.style.top = dotY + "px";
+
+    const stretch = Math.min(speed * 0.02, 0.5);
+    dot.style.transform = `translate(-50%, -50%) scale(${1 + stretch}, ${1 - stretch * 0.25})`;
+
+    speed *= 0.90;
+    requestAnimationFrame(animateDot);
+  }
+
+  function createTrail(x, y) {
+    const trail = document.createElement("div");
+    trail.className = "trail-dot";
+    trail.style.left = x + "px";
+    trail.style.top = y + "px";
+    trailContainer.appendChild(trail);
+
+    setTimeout(() => trail.remove(), 450);
+  }
+
+  animateDot();
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>How Industrial Plots Support Smart Long-Term Investment Planning - KJS Township</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body { font-family: Manrope, sans-serif; }
+
+    .hero-gradient {
+      background: linear-gradient(rgba(11, 28, 48, 0.76), rgba(11, 28, 48, 0.76));
+    }
+
+    #cursor-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: black;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.18);
+    }
+
+    #cursor-trail-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    .trail-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      animation: trailFade 0.45s ease-out forwards;
+    }
+
+    @keyframes trailFade {
+      0% {
+        opacity: 0.7;
+        transform: translate(-50%, -50%) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2);
+      }
+    }
+
+    @media (max-width: 768px) {
+      #cursor-dot,
+      #cursor-trail-container {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-[#f8f9ff] text-[#0b1c30] antialiased">
+  <div id="cursor-dot"></div>
+  <div id="cursor-trail-container"></div>
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+    <div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-20">
+
+      <div class="flex items-center">
+        <div class="bg-white border border-slate-200 px-6 py-2 rounded-lg shadow-sm flex items-center">
+          <img src="../img/logo.png" alt="KJS Township Logo" class="h-12 w-auto object-contain">
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center space-x-8">
+        <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../index.html">Home</a>
+        <a class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1" href="../blog.html">Blog</a>
+        <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../gallery.html">Gallery</a>
+        <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../about us.html">About Us</a>
+        <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../contact.html">Contact</a>
+      </div>
+
+      <a href="../contact.html" class="hidden md:block bg-black text-white px-6 py-3 rounded-lg text-sm font-semibold hover:opacity-80 transition-all">
+        Book a Visit
+      </a>
+
+      <button onclick="toggleMenu()" class="md:hidden text-slate-900">
+        <span class="material-symbols-outlined text-3xl">menu</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mobileMenu" class="hidden fixed top-20 left-0 w-full bg-white z-[999] border-b border-slate-100 shadow-lg md:hidden">
+    <div class="flex flex-col px-6 py-5 space-y-4">
+      <a class="text-slate-700" href="../index.html">Home</a>
+      <a class="text-slate-900 font-semibold" href="../blog.html">Blog</a>
+      <a class="text-slate-700" href="../gallery.html">Gallery</a>
+      <a class="text-slate-700" href="../about us.html">About Us</a>
+      <a class="text-slate-700" href="../contact.html">Contact</a>
+      <a class="bg-black text-white px-6 py-3 rounded-lg text-center" href="../contact.html">Book a Visit</a>
+    </div>
+  </div>
+
+  <main class="pt-20">
+
+    <!-- HERO -->
+    <section class="relative h-[460px] flex items-center justify-center overflow-hidden">
+      <img 
+        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?fm=jpg&q=60&w=1600&fit=max"
+        alt="Industrial investment planning"
+        class="absolute inset-0 w-full h-full object-cover"
+      >
+      <div class="absolute inset-0 hero-gradient"></div>
+
+      <div class="relative z-10 text-center px-6 max-w-4xl">
+        <p class="uppercase tracking-[0.2em] text-sm font-semibold text-slate-300 mb-4">
+          Investment Potential
+        </p>
+        <h1 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+          How Industrial Plots Support Smart Long-Term Investment Planning
+        </h1>
+        <p class="text-slate-200 text-lg leading-8 max-w-3xl mx-auto">
+          Industrial land is becoming a practical long-term asset for investors who want scalable returns, demand-backed value, and future stability.
+        </p>
+      </div>
+    </section>
+
+    <!-- ARTICLE -->
+    <section class="max-w-[1280px] mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-12 gap-12">
+
+      <!-- MAIN ARTICLE -->
+      <article class="lg:col-span-8 bg-white rounded-xl p-8 md:p-12 shadow-[0_20px_40px_rgba(15,23,42,0.04)] border border-slate-50">
+
+        <div class="flex flex-wrap gap-4 mb-8 text-sm text-slate-500">
+          <span class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">calendar_month</span>
+            April 2026
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">schedule</span>
+            5 min read
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">category</span>
+            Investment Potential
+          </span>
+        </div>
+
+        <div class="space-y-8 text-slate-600 leading-8 text-[17px]">
+
+          <p>
+            Real estate has always been a go-to investment, but today, the smart money is quietly shifting towards industrial plots.
+          </p>
+
+          <p>
+            Why? Because industrial land is not driven by emotions like residential property. It is driven by <strong class="text-slate-900">real demand</strong>.
+          </p>
+
+          <p>
+            Businesses need space to store, produce, and move goods. And that demand is only growing.
+          </p>
+
+          <p>
+            At 
+            <a href="../contact.html" class="text-blue-600 font-bold hover:underline">
+              KJS Township
+            </a>, 
+            this shift is clearly visible. Investors are no longer just buying land. They are planning for long-term, scalable returns.
+          </p>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">Why Industrial Plots Make Sense Today</h2>
+
+          <p>
+            Industrial plots work differently. They are not about quick flips. They are about steady growth backed by real usage.
+          </p>
+
+          <p>
+            A simple reason is demand. Every warehouse, factory, or logistics setup needs land first. That makes industrial land a foundation asset, not just an option.
+          </p>
+
+          <div class="bg-slate-50 border border-slate-100 rounded-xl p-6">
+            <ul class="space-y-3 text-slate-700">
+              <li class="flex gap-3"><span class="material-symbols-outlined text-black">local_shipping</span> Consistent demand from logistics and e-commerce</li>
+              <li class="flex gap-3"><span class="material-symbols-outlined text-black">factory</span> Manufacturing growth creates land requirement</li>
+              <li class="flex gap-3"><span class="material-symbols-outlined text-black">build_circle</span> Lower maintenance compared to residential properties</li>
+              <li class="flex gap-3"><span class="material-symbols-outlined text-black">sync_alt</span> Flexible usage as the market changes</li>
+            </ul>
+          </div>
+
+          <p>
+            This means your investment is not stuck. It evolves with the market.
+          </p>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">Built for Long-Term Growth</h2>
+
+          <p>
+            One of the biggest strengths of industrial plots is time.
+          </p>
+
+          <p>
+            Unlike other assets that fluctuate quickly, industrial land tends to grow steadily as the surrounding area develops.
+            Infrastructure improves, businesses move in, and gradually the value rises.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white border border-slate-100 rounded-xl p-6 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+              <h3 class="font-bold text-slate-900 mb-3">Wealth Builder</h3>
+              <p class="text-sm leading-7">Industrial plots can support long-term wealth creation through appreciation.</p>
+            </div>
+
+            <div class="bg-white border border-slate-100 rounded-xl p-6 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+              <h3 class="font-bold text-slate-900 mb-3">Practical Demand</h3>
+              <p class="text-sm leading-7">Demand comes from real businesses, not only emotional buying decisions.</p>
+            </div>
+
+            <div class="bg-white border border-slate-100 rounded-xl p-6 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+              <h3 class="font-bold text-slate-900 mb-3">Dual Potential</h3>
+              <p class="text-sm leading-7">Industrial land can support both rental income and capital appreciation.</p>
+            </div>
+          </div>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">Scalability: The Real Power</h2>
+
+          <p>
+            Here’s where industrial investment becomes powerful.
+          </p>
+
+          <p>
+            You are not limited to one use. You can start small and expand later.
+          </p>
+
+          <p>
+            For example, you might begin with a simple warehouse. Over time, as demand increases, you can upgrade or lease it for larger operations.
+            This ability to scale makes industrial plots a future-proof investment.
+          </p>
+
+          <div class="bg-[#0b1c30] text-white rounded-xl p-8">
+            <h3 class="text-2xl font-bold mb-5">Scalable Investment Advantage</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-200">
+              <p class="flex gap-3"><span class="material-symbols-outlined">warehouse</span> Start with warehouse use</p>
+              <p class="flex gap-3"><span class="material-symbols-outlined">domain_add</span> Expand to larger operations</p>
+              <p class="flex gap-3"><span class="material-symbols-outlined">payments</span> Lease for regular income</p>
+              <p class="flex gap-3"><span class="material-symbols-outlined">trending_up</span> Hold for future appreciation</p>
+            </div>
+          </div>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">Why Location Still Matters Most</h2>
+
+          <p>
+            Even the best investment idea needs the right place.
+          </p>
+
+          <p>
+            A strong industrial location should offer:
+          </p>
+
+          <ul class="space-y-4">
+            <li class="flex gap-3">
+              <span class="material-symbols-outlined text-black">check_circle</span>
+              Good road connectivity
+            </li>
+            <li class="flex gap-3">
+              <span class="material-symbols-outlined text-black">check_circle</span>
+              Access to major business zones
+            </li>
+            <li class="flex gap-3">
+              <span class="material-symbols-outlined text-black">check_circle</span>
+              Growing industrial surroundings
+            </li>
+          </ul>
+
+          <p>
+            This is exactly where 
+            <a href="../contact.html" class="text-blue-600 font-bold hover:underline">
+              KJS Township
+            </a> 
+            creates value. With its strategic position near the Delhi NCR growth zone, it offers both current demand and future appreciation potential.
+          </p>
+
+          <h2 class="text-3xl font-bold text-slate-900 pt-4">Final Thought</h2>
+
+          <p>
+            Smart investment is not about chasing trends. It is about understanding where demand is going.
+          </p>
+
+          <p>
+            Industrial plots are not just land anymore. They are working assets that support real businesses and real growth.
+          </p>
+
+          <p>
+            If you are planning for the long term, choosing a project like KJS Township is not just an investment decision.
+            <strong class="text-slate-900">It is a strategic move towards future stability and returns.</strong>
+          </p>
+
+        </div>
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="lg:col-span-4 space-y-8">
+
+        <div class="bg-white p-8 rounded-xl border border-slate-50 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">Planning a Long-Term Investment?</h3>
+          <p class="text-slate-600 leading-7 mb-6">
+            Talk to our team and understand industrial plot potential, location benefits, and future growth opportunities at KJS Township.
+          </p>
+          <a href="../contact.html" class="block text-center bg-black text-white px-6 py-3 rounded-lg font-semibold hover:opacity-80 transition-all">
+            Book a Site Visit
+          </a>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl border border-slate-50 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
+          <h3 class="text-xl font-bold text-slate-900 mb-5">Quick Highlights</h3>
+          <div class="space-y-4">
+            <p class="flex gap-3 text-slate-600"><span class="material-symbols-outlined text-black">trending_up</span> Long-term appreciation potential</p>
+            <p class="flex gap-3 text-slate-600"><span class="material-symbols-outlined text-black">warehouse</span> Rental income possibilities</p>
+            <p class="flex gap-3 text-slate-600"><span class="material-symbols-outlined text-black">factory</span> Business use flexibility</p>
+            <p class="flex gap-3 text-slate-600"><span class="material-symbols-outlined text-black">location_on</span> Delhi NCR growth zone advantage</p>
+          </div>
+        </div>
+
+        <div class="bg-[#0b1c30] p-8 rounded-xl text-white">
+          <h3 class="text-2xl font-bold mb-4">Invest for the Future</h3>
+          <p class="text-slate-300 leading-7 mb-6">
+            Explore industrial plots designed for demand-backed growth, flexible use, and long-term investment planning.
+          </p>
+          <a href="../contact.html" class="inline-block bg-white text-slate-900 px-6 py-3 rounded-lg font-semibold">
+            Get Project Details
+          </a>
+        </div>
+
+      </aside>
+    </section>
+
+    <!-- CTA -->
+    <section class="max-w-[1280px] mx-auto px-6 pb-20">
+      <div class="bg-[#0b1c30] p-12 rounded-xl text-white text-center">
+        <p class="uppercase tracking-[0.2em] text-sm text-slate-400 mb-4">Take the Next Step</p>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Explore KJS Township?</h2>
+        <p class="text-slate-300 max-w-2xl mx-auto leading-8 mb-8">
+          Book a site visit, talk to our team, or get complete project details for your industrial investment decision.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="../contact.html" class="px-6 py-3 rounded-lg border border-white/20 text-white hover:bg-white hover:text-slate-900 transition-all">
+            Book a Site Visit
+          </a>
+          <a href="../contact.html" class="px-6 py-3 rounded-lg border border-white/20 text-white hover:bg-white hover:text-slate-900 transition-all">
+            Talk to Our Team
+          </a>
+          <a href="#" class="px-6 py-3 rounded-lg border border-white/20 text-white hover:bg-white hover:text-slate-900 transition-all">
+            Download Brochure
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-50 border-t border-slate-200 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1280px] mx-auto px-6">
+      <div class="space-y-4">
+        <div class="text-xl font-bold text-slate-900">KJS Township</div>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          KJS Township is a future-ready industrial destination built for long-term growth and opportunity.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Explore</h4>
+        <ul class="space-y-2 text-sm text-slate-500">
+          <li><a class="hover:text-slate-900" href="../index.html">Home</a></li>
+          <li><a class="hover:text-slate-900" href="../blog.html">Blog</a></li>
+          <li><a class="hover:text-slate-900" href="../gallery.html">Gallery</a></li>
+          <li><a class="hover:text-slate-900" href="../about us.html">About Us</a></li>
+          <li><a class="hover:text-slate-900" href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Legal</h4>
+        <ul class="space-y-2 text-sm text-slate-500">
+          <li><a class="hover:text-slate-900" href="#">Privacy Policy</a></li>
+          <li><a class="hover:text-slate-900" href="#">Terms of Service</a></li>
+          <li><a class="hover:text-slate-900" href="#">Cookie Policy</a></li>
+          <li><a class="hover:text-slate-900" href="#">Sitemap</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold text-slate-900 mb-4">Follow Us</h4>
+        <div class="flex gap-4">
+          <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all">
+              <i class="fa-brands fa-facebook-f text-[20px]"></i>
+            </div>
+          </a>
+
+          <a href="https://www.instagram.com/kjstownshipofficial/" target="_blank">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all">
+              <i class="fa-brands fa-instagram text-[20px]"></i>
+            </div>
+          </a>
+
+          <div onclick="sharePage()" class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">share</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-[1280px] mx-auto px-6 mt-12 pt-8 border-t border-slate-200 text-center text-slate-500 text-sm flex justify-center">
+      <span>© 2026 KJS Township all rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({
+          title: "KJS Township",
+          text: "Check out this industrial project",
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert("Link copied!");
+      }
+    }
+  </script>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("mobileMenu").classList.toggle("hidden");
+    }
+  </script>
+
+  <script>
+    const dot = document.getElementById("cursor-dot");
+    const trailContainer = document.getElementById("cursor-trail-container");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let dotX = mouseX - 25;
+    let dotY = mouseY - 25;
+
+    let lastMouseX = mouseX;
+    let lastMouseY = mouseY;
+    let speed = 0;
+
+    const gap = 25;
+    const smooth = 0.18;
+
+    if (window.innerWidth > 768) {
+      document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        const dx = mouseX - lastMouseX;
+        const dy = mouseY - lastMouseY;
+        speed = Math.sqrt(dx * dx + dy * dy);
+
+        if (speed > 8) {
+          createTrail(dotX, dotY);
+        }
+
+        lastMouseX = mouseX;
+        lastMouseY = mouseY;
+      });
+
+      function animateDot() {
+        let dx = mouseX - dotX;
+        let dy = mouseY - dotY;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance > gap) {
+          let targetX = mouseX - (dx / distance) * gap;
+          let targetY = mouseY - (dy / distance) * gap;
+
+          dotX += (targetX - dotX) * smooth;
+          dotY += (targetY - dotY) * smooth;
+        }
+
+        dot.style.left = dotX + "px";
+        dot.style.top = dotY + "px";
+
+        const stretch = Math.min(speed * 0.02, 0.5);
+        dot.style.transform = `translate(-50%, -50%) scale(${1 + stretch}, ${1 - stretch * 0.25})`;
+
+        speed *= 0.90;
+
+        requestAnimationFrame(animateDot);
+      }
+
+      function createTrail(x, y) {
+        const trail = document.createElement("div");
+        trail.className = "trail-dot";
+        trail.style.left = x + "px";
+        trail.style.top = y + "px";
+        trailContainer.appendChild(trail);
+
+        setTimeout(() => {
+          trail.remove();
+        }, 450);
+      }
+
+      animateDot();
+    }
+  </script>
+</body>
+</html>
