@@ -159,13 +159,10 @@
 </head>
 <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
   <div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-20">
-
-    <!-- Logo -->
-    <div class="flex items-center">
-      <div class="bg-white border border-slate-200 px-6 py-2 rounded-lg shadow-sm flex items-center">
-        <img src="img/logo.png" alt="KJS Township Logo" class="h-12 w-auto object-contain">
-      </div>
-    </div>
+    
+  <div class="flex items-center gap-3">
+  <img src="img/logo.jpg" alt="KJS Township Logo" class="h-10 w-auto">
+</div>
 
     <!-- Desktop Menu -->
     <div class="hidden md:flex items-center space-x-8">
@@ -509,17 +506,4 @@ function sharePage() {
   }
 
   animateDot();
-</script>
-
-<script>
-  function toggleMenu() {
-    document.getElementById("mobileMenu").classList.toggle("hidden");
-  }
-</script>
-
-<script>
-if (window.innerWidth <= 768) {
-  document.getElementById("cursor-dot").style.display = "none";
-  document.getElementById("cursor-trail-container").style.display = "none";
-}
 </script>
