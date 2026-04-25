@@ -11,7 +11,9 @@ app.use(cors());
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtppro.zoho.in",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
@@ -24,7 +26,7 @@ app.post("/send-enquiry", async (req, res) => {
   try {
     await transporter.sendMail({
       from: `"KJS Township Website" <${process.env.EMAIL}>`,
-      to: process.env.TO_EMAIL,
+      to: process.env.TO_EMAIL || process.env.EMAIL,
       replyTo: email,
       subject: "New Website Enquiry - KJS Township",
       html: `
@@ -37,13 +39,19 @@ app.post("/send-enquiry", async (req, res) => {
       `,
     });
 
-    res.json({ success: true });
+    res.json({ success: true, message: "Email sent successfully" });
   } catch (error) {
     console.log("Email Error:", error);
-    res.json({ success: false });
+    res.json({ success: false, message: "Email failed" });
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+app.get("/", (req, res) => {
+  res.send("KJS Township backend is running");
+});
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
