@@ -206,3 +206,19 @@ app.post("/api/brochure-lead", async (req, res) => {
     });
   }
 });
+app.get("/", (req, res) => {
+  res.send("KJS Township backend is running securely.");
+});
+
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found."
+  });
+});
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Secure server running on port ${PORT}`);
+});
