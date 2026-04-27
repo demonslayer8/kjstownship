@@ -16,7 +16,9 @@ app.use(cors({
   origin: [
     "https://kjstownship.com",
     "https://www.kjstownship.com",
-    "https://splendid-moxie-2af031.netlify.app"
+    "https://splendid-moxie-2af031.netlify.app",
+    "http://127.0.0.1:5500",
+    "http://localhost:5500"
   ],
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type"]
@@ -34,6 +36,7 @@ const limiter = rateLimit({
 });
 
 app.use("/send-enquiry", limiter);
+app.use("/api/brochure-lead", limiter);
 
 const transporter = nodemailer.createTransport({
   host: "smtppro.zoho.in",
@@ -65,6 +68,7 @@ function cleanInput(value) {
   return validator.escape(String(value).trim());
 }
 
+/* CONTACT FORM */
 app.post("/send-enquiry", async (req, res) => {
   try {
     let { name, email, phone, interest, message, token } = req.body;
@@ -152,19 +156,53 @@ app.post("/send-enquiry", async (req, res) => {
   }
 });
 
-app.get("/", (req, res) => {
-  res.send("KJS Township backend is running securely.");
-});
+/* BROCHURE LEAD FORM */
+/* BROCHURE LEAD FORM */
+app.post("/api/brochure-lead", async (req, res) => {
+  try {
+    let { name, phone } = req.body;
 
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: "Route not found."
-  });
-});
+    name = cleanInput(name);
+    phone = cleanInput(phone);
 
-const PORT = process.env.PORT || 5000;
+    if (!name || !phone) {
+      return res.status(400).json({
+        success: false,
+        message: "Name and phone are required."
+      });
+    }
 
-app.listen(PORT, () => {
-  console.log(`Secure server running on port ${PORT}`);
+    if (!validator.isMobilePhone(phone, "en-IN")) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid phone number."
+      });
+    }
+
+    await transporter.sendMail({
+      from: `"KJS Township Website" <${process.env.EMAIL}>`,
+      to: process.env.TO_EMAIL || process.env.EMAIL,
+      subject: "New Brochure Download Lead - KJS Township",
+      html: `
+        <h2>New Brochure Lead</h2>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Phone:</b> ${phone}</p>
+        <p><b>Source:</b> Brochure Download</p>
+        <p><b>Date:</b> ${new Date().toLocaleString("en-IN")}</p>
+      `
+    });
+
+    res.json({
+      success: true,
+      message: "Brochure lead sent successfully."
+    });
+
+  } catch (error) {
+    console.log("Brochure Lead Error:", error.message);
+
+    res.status(500).json({
+      success: false,
+      message: "Server error."
+    });
+  }
 });
