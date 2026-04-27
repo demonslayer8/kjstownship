@@ -455,7 +455,7 @@
 
       <div class="lg:col-span-7">
         <div class="rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
-          <img src="img/Layout.png" alt="KJS Township Layout Plan" class="w-full h-auto object-cover">
+          <img src="img/Layout.webp" alt="KJS Township Layout Plan" class="w-full h-auto object-cover">
         </div>
       </div>
     </div>
@@ -903,40 +903,6 @@
 
   <i class="fa-brands fa-whatsapp text-3xl"></i>
 </a>
-<script>
-  function toggleMenu() {
-    document.getElementById("mobileMenu").classList.toggle("hidden");
-  }
-
-  function sharePage() {
-    if (navigator.share) {
-      navigator.share({
-        title: "KJS Township Project Details",
-        text: "Explore KJS Township industrial plots near Delhi NCR",
-        url: window.location.href
-      });
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert("Link copied!");
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll(".card-animate");
-
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    }, { threshold: 0.2 });
-
-    cards.forEach(function (card) {
-      observer.observe(card);
-    });
-  });
-</script>
 <!-- BROCHURE POPUP -->
 <div id="brochurePopup" class="hidden fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm flex items-center justify-center px-4">
   <div class="bg-white rounded-2xl max-w-md w-full p-8 relative shadow-[0_30px_80px_rgba(0,0,0,0.25)]">
@@ -972,6 +938,42 @@
 
   </div>
 </div>
+</body>
+</html>
+<script>
+  function toggleMenu() {
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+  }
+
+  function sharePage() {
+    if (navigator.share) {
+      navigator.share({
+        title: "KJS Township Project Details",
+        text: "Explore KJS Township industrial plots near Delhi NCR",
+        url: window.location.href
+      });
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert("Link copied!");
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll(".card-animate");
+
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    cards.forEach(function (card) {
+      observer.observe(card);
+    });
+  });
+</script>
 <script>
 function openBrochurePopup() {
   document.getElementById("brochurePopup").classList.remove("hidden");
@@ -1110,5 +1112,3 @@ document.addEventListener("DOMContentLoaded", function () {
   animateDot();
 });
 </script>
-</body>
-</html>
