@@ -449,7 +449,36 @@
       <span>© 2026 KJS Township all rights reserved.</span>
     </div>
   </footer>
+<div class="fixed bottom-6 right-6 z-[9999] flex items-center gap-3">
+  <span class="bg-white px-3 py-1 rounded-full text-sm shadow">
+    Chat with us
+  </span>
 
+  <a id="whatsappBtn"
+     target="_blank"
+     class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition">
+    <i class="fa-brands fa-whatsapp text-3xl"></i>
+  </a>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const phone = "919971601224";
+
+  const message = `Hi, I'm interested in KJS Township.
+Page: ${window.location.href}`;
+
+  const btn = document.getElementById("whatsappBtn");
+
+  if (btn) {
+    btn.href = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+    setTimeout(() => {
+      btn.classList.add("animate-bounce");
+    }, 5000);
+  }
+});
+</script>
   <script>
     function sharePage() {
       if (navigator.share) {
