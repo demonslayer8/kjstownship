@@ -5,8 +5,35 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
+<!-- SEO -->
+<title>Industrial Plots Near Delhi NCR | KJS Township Project</title>
+<meta name="description" content="Explore KJS Township industrial plots near Delhi NCR for warehouse, factory, logistics and long-term investment with planned infrastructure.">
+<meta name="keywords" content="industrial plots near Delhi NCR, KJS Township, industrial land Bahadurgarh, warehouse plots, factory plots, logistics land">
+
+<!-- Fonts optimized -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+<!-- Favicon -->
+<link rel="icon" href="img/Fevicon.png" type="image/png">
+<link rel="shortcut icon" href="img/Fevicon.png">
+<link rel="apple-touch-icon" href="img/Fevicon.png">
+
+<!-- Font Awesome optimized -->
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" href="img/Fevicon.png" type="image/png">
+<link rel="shortcut icon" href="img/Fevicon.png">
+<link rel="apple-touch-icon" href="img/Fevicon.png">
   <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
@@ -98,60 +125,8 @@
     }
   </script>
 
-  <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-    .hero-gradient {
-      background: linear-gradient(rgba(11, 28, 48, 0.72), rgba(11, 28, 48, 0.72));
-    }
-
-    #cursor-dot {
-      position: fixed;
-      width: 6px;
-      height: 6px;
-      background: black;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.18);
-    }
-
-    #cursor-trail-container {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9998;
-    }
-
-    .trail-dot {
-      position: fixed;
-      width: 6px;
-      height: 6px;
-      background: rgba(0, 0, 0, 0.18);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      animation: trailFade 0.45s ease-out forwards;
-    }
-
-    @keyframes trailFade {
-      0% {
-        opacity: 0.7;
-        transform: translate(-50%, -50%) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.2);
-      }
-    }
-  </style>
+  
 <body>
-<div id="cursor-dot"></div>
-<div id="cursor-trail-container"></div>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <title>About Us - KJS Township</title>
 </head>
@@ -177,7 +152,7 @@
         Home
       </a>
 <!-- Active About -->
-      <a href="about us.html"
+      <a href="aboutus.html"
          class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1">
         About Us
       </a>
@@ -230,7 +205,7 @@
     <a class="text-slate-700 hover:text-slate-900" href="index.html">
       Home
     </a>
-<a class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1" href="about us.html">
+<a class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1" href="aboutus.html">
       About Us
     </a>
     <a class="text-slate-700 hover:text-slate-900" href="project.html">
@@ -468,7 +443,7 @@
         <h4 class="font-semibold text-slate-900 mb-4">Explore</h4>
         <ul class="space-y-2 text-sm text-slate-500">
           <li><a class="hover:text-slate-900 transition-colors" href="index.html">Home</a></li>
-          <li><a class="hover:text-slate-900 transition-colors" href="about us.html">About Us</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="aboutus.html">About Us</a></li>
           <li><a class="hover:text-slate-900 transition-colors" href="blog.html">Blog</a></li>
           <li><a class="hover:text-slate-900 transition-colors" href="contact.html">Contact</a></li>
         </ul>
@@ -531,76 +506,6 @@
     }
   </script>
 
-  <script>
-    const dot = document.getElementById("cursor-dot");
-    const trailContainer = document.getElementById("cursor-trail-container");
-
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let dotX = mouseX - 25;
-    let dotY = mouseY - 25;
-
-    let lastMouseX = mouseX;
-    let lastMouseY = mouseY;
-    let speed = 0;
-
-    const gap = 25;
-    const smooth = 0.18;
-
-    document.addEventListener("mousemove", (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-
-      const dx = mouseX - lastMouseX;
-      const dy = mouseY - lastMouseY;
-      speed = Math.sqrt(dx * dx + dy * dy);
-
-      if (speed > 8) {
-        createTrail(dotX, dotY);
-      }
-
-      lastMouseX = mouseX;
-      lastMouseY = mouseY;
-    });
-
-    function animateDot() {
-      let dx = mouseX - dotX;
-      let dy = mouseY - dotY;
-      let distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance > gap) {
-        let targetX = mouseX - (dx / distance) * gap;
-        let targetY = mouseY - (dy / distance) * gap;
-
-        dotX += (targetX - dotX) * smooth;
-        dotY += (targetY - dotY) * smooth;
-      }
-
-      dot.style.left = dotX + "px";
-      dot.style.top = dotY + "px";
-
-      const stretch = Math.min(speed * 0.02, 0.5);
-      dot.style.transform = `translate(-50%, -50%) scale(${1 + stretch}, ${1 - stretch * 0.25})`;
-
-      speed *= 0.90;
-
-      requestAnimationFrame(animateDot);
-    }
-
-    function createTrail(x, y) {
-      const trail = document.createElement("div");
-      trail.className = "trail-dot";
-      trail.style.left = x + "px";
-      trail.style.top = y + "px";
-      trailContainer.appendChild(trail);
-
-      setTimeout(() => {
-        trail.remove();
-      }, 450);
-    }
-
-    animateDot();
-  </script>
 
   <script>
 const path = window.location.pathname;
@@ -625,6 +530,24 @@ if (window.innerWidth <= 768) {
   document.getElementById("cursor-dot").style.display = "none";
   document.getElementById("cursor-trail-container").style.display = "none";
 }
+</script>
+<script>
+const originalTitle = document.title;
+let interval;
+
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden) {
+    interval = setInterval(() => {
+      document.title =
+        document.title === "Hey 👋 come back!"
+          ? "KJS Township 🔥"
+          : "Hey 👋 come back!";
+    }, 1000);
+  } else {
+    clearInterval(interval);
+    document.title = originalTitle;
+  }
+});
 </script>
 </body>
 </html>

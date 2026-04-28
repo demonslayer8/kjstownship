@@ -6,6 +6,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="icon" href="img/Fevicon.png" type="image/png">
+<link rel="shortcut icon" href="img/Fevicon.png">
+<link rel="apple-touch-icon" href="img/Fevicon.png">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
       tailwind.config = {
@@ -107,97 +110,8 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-#cursor-dot {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  background: black;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
-}
 
-#cursor-trail-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9998;
-}
 
-.trail-dot {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  animation: trailFade 0.4s ease-out forwards;
-}
-
-@keyframes trailFade {
-  0% {
-    opacity: 0.7;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.2);
-  }
-}
-
-@media (max-width: 768px) {
-  #cursor-dot,
-  #cursor-trail-container {
-    display: none !important;
-  }
-}
-</style>
-<style>
-/* TRAIL CONTAINER */
-#cursor-trail-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9998;
-}
-
-/* TRAIL DOT */
-.trail-dot {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  animation: trailFade 0.4s ease-out forwards;
-}
-
-@keyframes trailFade {
-  0% {
-    opacity: 0.7;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.2);
-  }
-}
-
-/* ❌ HIDE ON MOBILE */
-@media (max-width: 768px) {
-  #cursor-dot,
-  #cursor-trail-container {
-    display: none;
-  }
-}
-</style>
 </head>
 <body>
   <body class="bg-background font-body-md text-on-background antialiased">
@@ -220,7 +134,7 @@
     <div class="hidden md:flex items-center space-x-8">
 
      <a href="index.html" class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">Home</a>
-      <a href="about us.html" class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">About Us</a>
+      <a href="aboutus.html" class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">About Us</a>
        <a href="project.html" class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">Project</a>
       <a href="blog.html" class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">Blog</a>
       <a href="gallery.html" class="text-slate-500 hover:text-slate-900 pb-1 hover:border-b-2 hover:border-slate-900">Gallery</a>
@@ -255,7 +169,7 @@
     <a class="text-slate-700 hover:text-slate-900" href="index.html">
       Home
     </a>
-    <a class="text-slate-700 hover:text-slate-900" href="about us.html">
+    <a class="text-slate-700 hover:text-slate-900" href="aboutus.html">
       About Us
     </a>
   <a class="text-slate-700" href="project.html">Project</a>
@@ -417,7 +331,7 @@
   <h4 class="font-semibold text-slate-900 mb-4">Explore</h4>
   <ul class="space-y-2 text-sm text-slate-500">
     <li><a class="hover:text-slate-900 transition-colors" href="index.html">Home</a></li>
-    <li><a class="hover:text-slate-900 transition-colors" href="about us.html">About Us</a></li>
+    <li><a class="hover:text-slate-900 transition-colors" href="aboutus.html">About Us</a></li>
     <li><a class="hover:text-slate-900 transition-colors" href="blog.html">Blog</a></li>
     <li><a class="hover:text-slate-900 transition-colors" href="gallery.html">Gallery</a></li>
     <li><a class="hover:text-slate-900 transition-colors" href="contact.html">Contact</a></li>
@@ -519,81 +433,25 @@ function sharePage() {
 }
 </script>
 <script>
-/* ❌ STOP RUNNING ON MOBILE */
-if (window.innerWidth > 768) {
-
-  const dot = document.getElementById("cursor-dot");
-  const trailContainer = document.getElementById("cursor-trail-container");
-
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let dotX = mouseX - 25;
-  let dotY = mouseY - 25;
-
-  let lastMouseX = mouseX;
-  let lastMouseY = mouseY;
-  let speed = 0;
-
-  const gap = 25;
-  const smooth = 0.18;
-
-  document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    const dx = mouseX - lastMouseX;
-    const dy = mouseY - lastMouseY;
-    speed = Math.sqrt(dx * dx + dy * dy);
-
-    if (speed > 8) {
-      createTrail(dotX, dotY);
-    }
-
-    lastMouseX = mouseX;
-    lastMouseY = mouseY;
-  });
-
-  function animateDot() {
-    let dx = mouseX - dotX;
-    let dy = mouseY - dotY;
-    let distance = Math.sqrt(dx * dx + dy * dy);
-
-    if (distance > gap) {
-      let targetX = mouseX - (dx / distance) * gap;
-      let targetY = mouseY - (dy / distance) * gap;
-
-      dotX += (targetX - dotX) * smooth;
-      dotY += (targetY - dotY) * smooth;
-    }
-
-    dot.style.left = dotX + "px";
-    dot.style.top = dotY + "px";
-
-    const stretch = Math.min(speed * 0.02, 0.5);
-    dot.style.transform = `translate(-50%, -50%) scale(${1 + stretch}, ${1 - stretch * 0.25})`;
-
-    speed *= 0.90;
-
-    requestAnimationFrame(animateDot);
-  }
-
-  function createTrail(x, y) {
-    const trail = document.createElement("div");
-    trail.className = "trail-dot";
-    trail.style.left = x + "px";
-    trail.style.top = y + "px";
-    trailContainer.appendChild(trail);
-
-    setTimeout(() => {
-      trail.remove();
-    }, 400);
-  }
-
-  animateDot();
-}
-</script>
-<script>
 function toggleMenu() {
   document.getElementById("mobileMenu").classList.toggle("hidden");
 }
+</script>
+<script>
+const originalTitle = document.title;
+let interval;
+
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden) {
+    interval = setInterval(() => {
+      document.title =
+        document.title === "Hey 👋 come back!"
+          ? "KJS Township 🔥"
+          : "Hey 👋 come back!";
+    }, 1000);
+  } else {
+    clearInterval(interval);
+    document.title = originalTitle;
+  }
+});
 </script>

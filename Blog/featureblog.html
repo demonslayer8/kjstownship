@@ -10,70 +10,12 @@
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <style>
-    body {
-      font-family: Manrope, sans-serif;
-    }
-
-    .hero-gradient {
-      background: linear-gradient(rgba(11, 28, 48, 0.76), rgba(11, 28, 48, 0.76));
-    }
-
-    #cursor-dot {
-      position: fixed;
-      width: 6px;
-      height: 6px;
-      background: black;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.18);
-    }
-
-    #cursor-trail-container {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9998;
-    }
-
-    .trail-dot {
-      position: fixed;
-      width: 6px;
-      height: 6px;
-      background: rgba(0, 0, 0, 0.18);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      animation: trailFade 0.45s ease-out forwards;
-    }
-
-    @keyframes trailFade {
-      0% {
-        opacity: 0.7;
-        transform: translate(-50%, -50%) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.2);
-      }
-    }
-
-    @media (max-width: 768px) {
-      #cursor-dot,
-      #cursor-trail-container {
-        display: none;
-      }
-    }
-  </style>
+<link rel="icon" href="img/Fevicon.png" type="image/png">
+<link rel="shortcut icon" href="img/Fevicon.png">
+<link rel="apple-touch-icon" href="img/Fevicon.png">
 </head>
 
 <body class="bg-[#f8f9ff] text-[#0b1c30] antialiased">
-  <div id="cursor-dot"></div>
-  <div id="cursor-trail-container"></div>
 
   <!-- NAVBAR -->
   <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
@@ -90,7 +32,7 @@
     
       <div class="hidden md:flex items-center space-x-8">
         <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../index.html">Home</a>
-         <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../about us.html">About Us</a>
+         <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../aboutus.html">About Us</a>
          <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../project.html">Project</a>
         <a class="text-slate-900 font-semibold border-b-2 border-slate-900 pb-1" href="../blog.html">Blog</a>
         <a class="text-slate-500 hover:text-slate-900 transition-colors" href="../gallery.html">Gallery</a>
@@ -111,7 +53,7 @@
   <div id="mobileMenu" class="hidden fixed top-20 left-0 w-full bg-white z-[999] border-b border-slate-100 shadow-lg md:hidden">
     <div class="flex flex-col px-6 py-5 space-y-4">
       <a class="text-slate-700" href="../index.html">Home</a>
-      <a class="text-slate-700" href="../about us.html">About Us</a>
+      <a class="text-slate-700" href="../aboutus.html">About Us</a>
       <a class="text-slate-700" href="../project.html">Project</a>
       <a class="text-slate-900 font-semibold" href="../blog.html">Blog</a>
       <a class="text-slate-700" href="../gallery.html">Gallery</a>
@@ -371,7 +313,7 @@
         <ul class="space-y-2 text-sm text-slate-500">
           <li><a class="hover:text-slate-900" href="index.html">Home</a></li>
           <li><a class="hover:text-slate-900" href="blog.html">Blog</a></li>
-          <li><a class="hover:text-slate-900" href="about us.html">About Us</a></li>
+          <li><a class="hover:text-slate-900" href="aboutus.html">About Us</a></li>
           <li><a class="hover:text-slate-900" href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -419,78 +361,23 @@
       document.getElementById("mobileMenu").classList.toggle("hidden");
     }
   </script>
-
   <script>
-    const dot = document.getElementById("cursor-dot");
-    const trailContainer = document.getElementById("cursor-trail-container");
+const originalTitle = document.title;
+let interval;
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let dotX = mouseX - 25;
-    let dotY = mouseY - 25;
-
-    let lastMouseX = mouseX;
-    let lastMouseY = mouseY;
-    let speed = 0;
-
-    const gap = 25;
-    const smooth = 0.18;
-
-    if (window.innerWidth > 768) {
-      document.addEventListener("mousemove", (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-
-        const dx = mouseX - lastMouseX;
-        const dy = mouseY - lastMouseY;
-        speed = Math.sqrt(dx * dx + dy * dy);
-
-        if (speed > 8) {
-          createTrail(dotX, dotY);
-        }
-
-        lastMouseX = mouseX;
-        lastMouseY = mouseY;
-      });
-
-      function animateDot() {
-        let dx = mouseX - dotX;
-        let dy = mouseY - dotY;
-        let distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance > gap) {
-          let targetX = mouseX - (dx / distance) * gap;
-          let targetY = mouseY - (dy / distance) * gap;
-
-          dotX += (targetX - dotX) * smooth;
-          dotY += (targetY - dotY) * smooth;
-        }
-
-        dot.style.left = dotX + "px";
-        dot.style.top = dotY + "px";
-
-        const stretch = Math.min(speed * 0.02, 0.5);
-        dot.style.transform = `translate(-50%, -50%) scale(${1 + stretch}, ${1 - stretch * 0.25})`;
-
-        speed *= 0.90;
-
-        requestAnimationFrame(animateDot);
-      }
-
-      function createTrail(x, y) {
-        const trail = document.createElement("div");
-        trail.className = "trail-dot";
-        trail.style.left = x + "px";
-        trail.style.top = y + "px";
-        trailContainer.appendChild(trail);
-
-        setTimeout(() => {
-          trail.remove();
-        }, 450);
-      }
-
-      animateDot();
-    }
-  </script>
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden) {
+    interval = setInterval(() => {
+      document.title =
+        document.title === "Hey 👋 come back!"
+          ? "KJS Township 🔥"
+          : "Hey 👋 come back!";
+    }, 1000);
+  } else {
+    clearInterval(interval);
+    document.title = originalTitle;
+  }
+});
+</script>
 </body>
 </html>
