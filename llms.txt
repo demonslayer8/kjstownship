@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Site: https://kjstownship.com
+Content: Industrial plots, real estate, investment, warehouse, factory land
+Brand: KJS Township
