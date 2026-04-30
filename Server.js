@@ -157,7 +157,6 @@ app.post("/send-enquiry", async (req, res) => {
 });
 
 /* BROCHURE LEAD FORM */
-/* BROCHURE LEAD FORM */
 app.post("/api/brochure-lead", async (req, res) => {
   try {
     let { name, phone } = req.body;
