@@ -61,7 +61,8 @@ async function verifyCaptcha(token) {
   });
 
   const data = await response.json();
-  return data.success;
+console.log("Captcha Response:", data);
+return data.success;
 }
 
 function cleanInput(value) {
