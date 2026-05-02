@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
+<html class="light" lang="en">
+  
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
@@ -113,7 +115,6 @@
 
 
 </head>
-<body>
   <body class="bg-background font-body-md text-on-background antialiased">
 
 <div id="cursor-dot"></div>
@@ -122,7 +123,7 @@
   <div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-20">
 
     <!-- Logo -->
-    <a href="index.html">
+<a href="index.html">
   <div class="flex items-center">
     <div class="bg-white border border-slate-200 px-6 py-2 rounded-lg shadow-sm flex items-center">
       <img src="img/logo.png" alt="KJS Township Logo" class="h-12 w-auto object-contain">
@@ -386,12 +387,20 @@
 document.getElementById("contactForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
+  const token = grecaptcha.getResponse();
+
+  if (!token) {
+    alert("Please verify reCAPTCHA first.");
+    return;
+  }
+
   const formData = {
     name: document.getElementById("fullname").value,
     email: document.getElementById("email").value,
     phone: document.getElementById("phone").value,
     interest: document.getElementById("interest").value,
-    message: document.getElementById("message").value
+    message: document.getElementById("message").value,
+    token: token
   };
 
   try {
@@ -408,8 +417,9 @@ document.getElementById("contactForm").addEventListener("submit", async function
     if (result.success) {
       alert("Message sent successfully!");
       document.getElementById("contactForm").reset();
+      grecaptcha.reset();
     } else {
-      alert("Message failed. Please try again.");
+      alert(result.message || "Message failed. Please try again.");
     }
   } catch (error) {
     alert("Server not connected.");
@@ -417,7 +427,10 @@ document.getElementById("contactForm").addEventListener("submit", async function
 });
 </script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-</body></html>
+
+</body>
+
+</html>
 <script>
 function sharePage() {
     if (navigator.share) {
