@@ -16,6 +16,7 @@ app.use(cors({
   origin: [
     "https://kjstownship.com",
     "https://www.kjstownship.com",
+    "https://kjstownship.pages.dev",   // ✅ ADD THIS
     "https://splendid-moxie-2af031.netlify.app",
     "http://127.0.0.1:5500",
     "http://localhost:5500"
