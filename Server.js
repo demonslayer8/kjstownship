@@ -55,15 +55,18 @@ app.use("/api/brochure-lead", limiter);
 
 const transporter = nodemailer.createTransport({
   host: "smtp.zoho.in",
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
   },
-  connectionTimeout: 20000,
-  greetingTimeout: 20000,
-  socketTimeout: 20000,
+  tls: {
+    rejectUnauthorized: false
+  },
+  connectionTimeout: 30000,
+  greetingTimeout: 30000,
+  socketTimeout: 30000,
 });
 
 async function verifyCaptcha(token) {
@@ -169,7 +172,12 @@ app.post("/send-enquiry", async (req, res) => {
     });
 
   } catch (error) {
-    console.log("Server Error:", error.message);
+   console.log("Server Error Full:", {
+  message: error.message,
+  code: error.code,
+  command: error.command,
+  response: error.response
+});
 
     res.status(500).json({
       success: false,
