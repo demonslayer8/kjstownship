@@ -88,6 +88,9 @@ app.post("/send-enquiry", async (req, res) => {
   try {
     let { name, email, phone, interest, message, token } = req.body;
 
+    // ✅ Support Google reCAPTCHA v2 checkbox also
+    token = token || req.body["g-recaptcha-response"];
+
     const isHuman = await verifyCaptcha(token);
 
     if (!isHuman) {

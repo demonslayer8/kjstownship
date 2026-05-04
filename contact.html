@@ -393,12 +393,16 @@ document.getElementById("contactForm").addEventListener("submit", async function
     return;
   }
 
+  const btn = e.target.querySelector("button");
+  btn.disabled = true;
+  btn.innerText = "Sending...";
+
   const formData = {
-    name: document.getElementById("fullname").value,
-    email: document.getElementById("email").value,
-    phone: document.getElementById("phone").value,
-    interest: document.getElementById("interest").value,
-    message: document.getElementById("message").value,
+    name: document.getElementById("fullname").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    interest: document.getElementById("interest").value.trim(),
+    message: document.getElementById("message").value.trim(),
     token: token
   };
 
@@ -420,9 +424,14 @@ document.getElementById("contactForm").addEventListener("submit", async function
     } else {
       alert(result.message || "Message failed. Please try again.");
     }
+
   } catch (error) {
-    alert("Server not connected.");
+    console.log(error);
+    alert("Server error. Please try again.");
   }
+
+  btn.disabled = false;
+  btn.innerText = "Send Message";
 });
 </script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
