@@ -54,13 +54,16 @@ app.use("/send-enquiry", limiter);
 app.use("/api/brochure-lead", limiter);
 
 const transporter = nodemailer.createTransport({
-  host: "smtppro.zoho.in",
+  host: "smtp.zoho.in",
   port: 465,
   secure: true,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
   },
+  connectionTimeout: 20000,
+  greetingTimeout: 20000,
+  socketTimeout: 20000,
 });
 
 async function verifyCaptcha(token) {
