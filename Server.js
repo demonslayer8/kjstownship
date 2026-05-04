@@ -54,21 +54,33 @@ app.use("/send-enquiry", limiter);
 app.use("/api/brochure-lead", limiter);
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.zoho.in",
+  host: "smtp.zoho.com",
   port: 587,
   secure: false,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASS,
   },
+  requireTLS: true,
   tls: {
     rejectUnauthorized: false
   },
-  connectionTimeout: 30000,
-  greetingTimeout: 30000,
-  socketTimeout: 30000,
+  connectionTimeout: 60000,
+  greetingTimeout: 60000,
+  socketTimeout: 60000,
 });
-
+transporter.verify((error, success) => {
+  if (error) {
+    console.log("SMTP Verify Error:", {
+      message: error.message,
+      code: error.code,
+      command: error.command,
+      response: error.response
+    });
+  } else {
+    console.log("SMTP Server is ready");
+  }
+});
 async function verifyCaptcha(token) {
   if (!token) return false;
 
