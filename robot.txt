@@ -1,19 +1,10 @@
 User-agent: *
 Allow: /
 
-# Block unnecessary pages
+# Block sensitive areas
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env/
-Disallow: /api/
-
-# Allow important pages
-Allow: /index.html
-Allow: /aboutus.html
-Allow: /project.html
-Allow: /blog.html
-Allow: /gallery.html
-Allow: /contact.html
 
 # Sitemap
 Sitemap: https://kjstownship.com/sitemap.xml
