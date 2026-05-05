@@ -1,10 +1,8 @@
 User-agent: *
 Allow: /
 
-# Block sensitive areas
 Disallow: /admin/
 Disallow: /private/
 Disallow: /.env/
 
-# Sitemap
 Sitemap: https://kjstownship.com/sitemap.xml
