@@ -99,6 +99,7 @@
       },
     }
   </script>
+<body>
   <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
@@ -125,31 +126,16 @@
 <!-- Font Awesome optimized -->
 <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" as="style">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y5CC56RD3Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Y5CC56RD3Q');
-</script>
 </head>
 <body>
 <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-[0_20px_40px_rgba(15,23,42,0.04)]">
   <div class="flex justify-between items-center max-w-[1280px] mx-auto px-6 h-20">
 
-     <!-- Logo -->
-  <a href="index.html">
+    <!-- Logo -->
+    <a href="index.html">
   <div class="flex items-center">
-    <div class="bg-white border border-slate-200 px-4 py-2 rounded-lg shadow-sm flex items-center">
-      <img 
-        src="img/logo.webp" 
-        alt="KJS Township Logo" 
-        class="h-12 w-auto object-contain"
-        loading="eager"
-        decoding="async"
-      >
+    <div class="bg-white border border-slate-200 px-6 py-2 rounded-lg shadow-sm flex items-center">
+      <img src="img/logo.png" alt="KJS Township Logo" class="h-12 w-auto object-contain">
     </div>
   </div>
 </a>
@@ -392,8 +378,8 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-slate-50 border-t border-slate-200 py-12 font-manrope">
-     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1280px] mx-auto px-6">
+     <footer class="bg-slate-50 border-t border-slate-200 py-12 font-manrope">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1280px] mx-auto px-6">
       <div class="space-y-4">
         <div class="text-xl font-bold text-slate-900">KJS Township</div>
         <p class="text-slate-500 text-sm leading-relaxed">
@@ -402,7 +388,7 @@
       </div>
 
       <div>
-        <h4 class="font-semibold text-slate-900 mb-4">Explore</h4>
+        <div class="font-semibold text-slate-900 mb-4">Explore</div>
         <ul class="space-y-2 text-sm text-slate-500">
           <li><a class="hover:text-slate-900 transition-colors" href="index.html">Home</a></li>
           <li><a class="hover:text-slate-900 transition-colors" href="aboutus.html">About Us</a></li>
@@ -412,7 +398,7 @@
       </div>
 
       <div>
-        <h4 class="font-semibold text-slate-900 mb-4">Legal</h4>
+        <div class="font-semibold text-slate-900 mb-4">Legal</div>
         <ul class="space-y-2 text-sm text-slate-500">
           <li><a class="hover:text-slate-900 transition-colors" href="#">Privacy Policy</a></li>
           <li><a class="hover:text-slate-900 transition-colors" href="#">Terms of Service</a></li>
@@ -422,7 +408,7 @@
       </div>
 
       <div>
-        <h4 class="font-semibold text-slate-900 mb-4">Follow Us</h4>
+        <div class="font-semibold text-slate-900 mb-4">Follow Us</div>
         <div class="flex gap-4">
           <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
             <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">

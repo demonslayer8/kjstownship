@@ -306,7 +306,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="bg-slate-50 border-t border-slate-200 py-12">
+  <footer class="bg-slate-50 border-t border-slate-200 py-12 font-manrope">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1280px] mx-auto px-6">
       <div class="space-y-4">
         <div class="text-xl font-bold text-slate-900">KJS Township</div>
@@ -316,39 +316,43 @@
       </div>
 
       <div>
-        <h4 class="font-semibold text-slate-900 mb-4">Explore</h4>
+        <div class="font-semibold text-slate-900 mb-4">Explore</div>
         <ul class="space-y-2 text-sm text-slate-500">
-          <li><a class="hover:text-slate-900" href="index.html">Home</a></li>
-          <li><a class="hover:text-slate-900" href="blog.html">Blog</a></li>
-          <li><a class="hover:text-slate-900" href="aboutus.html">About Us</a></li>
-          <li><a class="hover:text-slate-900" href="contact.html">Contact</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="index.html">Home</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="aboutus.html">About Us</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="blog.html">Blog</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="contact.html">Contact</a></li>
         </ul>
       </div>
 
       <div>
-        <h4 class="font-semibold text-slate-900 mb-4">Legal</h4>
+        <div class="font-semibold text-slate-900 mb-4">Legal</div>
         <ul class="space-y-2 text-sm text-slate-500">
-          <li><a class="hover:text-slate-900" href="#">Privacy Policy</a></li>
-          <li><a class="hover:text-slate-900" href="#">Terms of Service</a></li>
-          <li><a class="hover:text-slate-900" href="#">Cookie Policy</a></li>
-          <li><a class="hover:text-slate-900" href="#">Sitemap</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Privacy Policy</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Terms of Service</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Cookie Policy</a></li>
+          <li><a class="hover:text-slate-900 transition-colors" href="#">Sitemap</a></li>
         </ul>
       </div>
 
       <div>
-        <h4 class="font-semibold text-slate-900 mb-4">Follow Us</h4>
+        <div class="font-semibold text-slate-900 mb-4">Follow Us</div>
         <div class="flex gap-4">
           <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
-            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
               <i class="fa-brands fa-facebook-f text-[20px]"></i>
             </div>
           </a>
 
           <a href="https://www.instagram.com/kjstownshipofficial/" target="_blank">
-            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all">
+            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
               <i class="fa-brands fa-instagram text-[20px]"></i>
             </div>
           </a>
+
+          <div onclick="sharePage()" class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+            <span class="material-symbols-outlined text-[20px]">share</span>
+          </div>
         </div>
       </div>
     </div>
