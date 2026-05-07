@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gallery - KJS Township</title>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -320,20 +320,19 @@
         </ul>
       </div>
 
-      <div>
-        <div class="font-semibold text-slate-900 mb-4">Follow Us</div>
-        <div class="flex gap-4">
-          <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
-            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
-              <i class="fa-brands fa-facebook-f text-[20px]"></i>
-            </div>
-          </a>
+    
+       <div class="flex gap-4">
+            <a href="https://www.facebook.com/profile.php?id=61572159641100" target="_blank">
+              <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+                <i class="fa-brands fa-facebook-f text-[20px]"></i>
+              </div>
+            </a>
 
-          <a href="https://www.instagram.com/kjstownshipofficial/" target="_blank">
-            <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
-              <i class="fa-brands fa-instagram text-[20px]"></i>
-            </div>
-          </a>
+            <a href="https://www.instagram.com/kjstownshipofficial/" target="_blank">
+              <div class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
+                <i class="fa-brands fa-instagram text-[20px]"></i>
+              </div>
+            </a>
 
           <div onclick="sharePage()" class="w-10 h-10 border border-slate-200 rounded flex items-center justify-center text-slate-600 hover:border-slate-900 hover:text-slate-900 transition-all cursor-pointer">
             <span class="material-symbols-outlined text-[20px]">share</span>
@@ -365,15 +364,29 @@ document.addEventListener("visibilitychange", function () {
   if (document.hidden) {
     interval = setInterval(() => {
       document.title =
-        document.title === "Hey 👋 come back!"
-          ? "KJS Township 🔥"
-          : "Hey 👋 come back!";
+        document.title === "Hey come back!"
+          ? "KJS Township"
+          : "Hey come back!";
     }, 1000);
   } else {
     clearInterval(interval);
     document.title = originalTitle;
   }
 });
+</script>
+<script>
+  function sharePage() {
+    if (navigator.share) {
+      navigator.share({
+        title: "KJS Township",
+        text: "Check out KJS Township Industrial Plots",
+        url: "https://kjstownship.com"
+      });
+    } else {
+      navigator.clipboard.writeText("https://kjstownship.com");
+      alert("Website link copied!");
+    }
+  }
 </script>
 </body>
 </html>
