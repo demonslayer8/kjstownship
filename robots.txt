@@ -6,3 +6,4 @@ Disallow: /private/
 Disallow: /.env/
 
 Sitemap: https://kjstownship.com/sitemap.xml
+
