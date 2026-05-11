@@ -2,48 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://kjstownship.com/</loc>
+    <loc>https://www.kjstownship.com/</loc>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://kjstownship.com/aboutus.html</loc>
+    <loc>https://www.kjstownship.com/aboutus.html</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://kjstownship.com/project.html</loc>
+    <loc>https://www.kjstownship.com/project.html</loc>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://kjstownship.com/blog.html</loc>
+    <loc>https://www.kjstownship.com/blog.html</loc>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://kjstownship.com/gallery.html</loc>
+    <loc>https://www.kjstownship.com/gallery.html</loc>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://kjstownship.com/contact.html</loc>
+    <loc>https://www.kjstownship.com/contact.html</loc>
     <priority>0.9</priority>
   </url>
 
   <!-- Blog Pages -->
   <url>
-    <loc>https://kjstownship.com/Blog/investmentblog.html</loc>
+    <loc>https://www.kjstownship.com/blog/investmentblog.html</loc>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://kjstownship.com/Blog/warehouseblog.html</loc>
+    <loc>https://www.kjstownship.com/blog/warehouseblog.html</loc>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://kjstownship.com/Blog/locationblog.html</loc>
+    <loc>https://www.kjstownship.com/blog/locationblog.html</loc>
     <priority>0.7</priority>
   </url>
 
