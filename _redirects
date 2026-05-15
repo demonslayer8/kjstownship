@@ -7,15 +7,17 @@ http://www.kjstownship.com/* https://www.kjstownship.com/:splat 301!
 /Blog/locationblog.html /blog/locationblog.html 301
 /Blog/businessblog.html /blog/businessblog.html 301
 /Blog/featureblog.html /blog/featureblog.html 301
-/Blog/Infrastructureblog.html /blog/Infrastructureblog.html 301
+/Blog/Infrastructureblog.html /blog/infrastructureblog.html 301
 /Blog/markettrandsblog.html /blog/markettrandsblog.html 301
+
+/blog/Infrastructureblog.html /blog/infrastructureblog.html 301
 
 /Blog/investmentblog /blog/investmentblog.html 301
 /Blog/warehouseblog /blog/warehouseblog.html 301
 /Blog/locationblog /blog/locationblog.html 301
 /Blog/businessblog /blog/businessblog.html 301
 /Blog/featureblog /blog/featureblog.html 301
-/Blog/Infrastructureblog /blog/Infrastructureblog.html 301
+/Blog/Infrastructureblog /blog/infrastructureblog.html 301
 /Blog/markettrandsblog /blog/markettrandsblog.html 301
 
 /* /index.html 200
