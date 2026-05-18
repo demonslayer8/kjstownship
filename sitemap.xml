@@ -47,4 +47,24 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://www.kjstownship.com/blog/businessblog.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kjstownship.com/blog/featureblog.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kjstownship.com/blog/infrastructureblog.html</loc>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.kjstownship.com/blog/markettrandsblog.html</loc>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
