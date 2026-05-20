@@ -53,19 +53,12 @@ const limiter = rateLimit({
 app.use("/send-enquiry", limiter);
 app.use("/api/brochure-lead", limiter);
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-  connectionTimeout: 60000,
-  greetingTimeout: 60000,
-  socketTimeout: 60000,
+console.log({
+  SMTP_USER: process.env.SMTP_USER,
+  SMTP_PASS_EXISTS: !!process.env.SMTP_PASS
 });
-transporter.verify((error, success) => {
+
+transporter.verify((error) => {
   if (error) {
     console.log("SMTP Verify Error:", {
       message: error.message,
@@ -77,6 +70,7 @@ transporter.verify((error, success) => {
     console.log("SMTP Server is ready");
   }
 });
+
 async function verifyCaptcha(token) {
   if (!token) return false;
 
@@ -89,8 +83,8 @@ async function verifyCaptcha(token) {
   });
 
   const data = await response.json();
-console.log("Captcha Response:", data);
-return data.success;
+  console.log("Captcha Response:", data);
+  return data.success;
 }
 
 function cleanInput(value) {
