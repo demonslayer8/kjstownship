@@ -166,7 +166,7 @@ app.post("/send-enquiry", async (req, res) => {
     }
 
     await transporter.sendMail({
-      from: `"KJS Township Website" <${process.env.SMTP_USER}>`,
+      from: `"KJS Township Website" <admin@kjstownship.com>`,
       to: process.env.TO_EMAIL,
       replyTo: email,
       subject: "New Website Enquiry - KJS Township",
@@ -223,7 +223,7 @@ app.post("/api/brochure-lead", async (req, res) => {
     }
 
     await transporter.sendMail({
-  from: `"KJS Township Website" <${process.env.SMTP_USER}>`,
+  from: `"KJS Township Website" <admin@kjstownship.com>`,
   to: process.env.TO_EMAIL,
   subject: "New Brochure Download Lead - KJS Township",
   html: `
