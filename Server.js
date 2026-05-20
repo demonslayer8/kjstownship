@@ -165,20 +165,28 @@ app.post("/send-enquiry", async (req, res) => {
       });
     }
 
-    await transporter.sendMail({
-      from: `"KJS Township Website" <admin@kjstownship.com>`,
-      to: process.env.TO_EMAIL,
-      replyTo: email,
-      subject: "New Website Enquiry - KJS Township",
-      html: `
-        <h2>New Website Enquiry</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>Interested In:</b> ${interest}</p>
-        <p><b>Message:</b> ${message}</p>
-      `,
-    });
+   await transporter.sendMail({
+  from: `"KJS Township Website" <admin@kjstownship.com>`,
+  to: process.env.TO_EMAIL,
+  subject: "KJS Township Contact Form Submission",
+
+  text: `
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Interested In: ${interest}
+Message: ${message}
+  `,
+
+  html: `
+    <h2>KJS Township Contact Form Submission</h2>
+    <p><b>Name:</b> ${name}</p>
+    <p><b>Email:</b> ${email}</p>
+    <p><b>Phone:</b> ${phone}</p>
+    <p><b>Interested In:</b> ${interest}</p>
+    <p><b>Message:</b> ${message}</p>
+  `,
+});
 
     res.json({
       success: true,
