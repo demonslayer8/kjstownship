@@ -54,12 +54,12 @@ app.use("/send-enquiry", limiter);
 app.use("/api/brochure-lead", limiter);
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.zoho.in",
+  host: "smtp.gmail.com",
   port: 587,
   secure: false,
   auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASS,
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
   },
   requireTLS: true,
   tls: {
