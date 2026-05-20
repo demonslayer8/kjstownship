@@ -55,15 +55,11 @@ app.use("/api/brochure-lead", limiter);
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
-  },
-  requireTLS: true,
-  tls: {
-    rejectUnauthorized: false
   },
   connectionTimeout: 60000,
   greetingTimeout: 60000,
@@ -164,8 +160,8 @@ app.post("/send-enquiry", async (req, res) => {
     }
 
     await transporter.sendMail({
-      from: `"KJS Township Website" <${process.env.EMAIL}>`,
-      to: process.env.TO_EMAIL || process.env.EMAIL,
+      from: `"KJS Township Website" <${process.env.SMTP_USER}>`,
+      to: process.env.TO_EMAIL,
       replyTo: email,
       subject: "New Website Enquiry - KJS Township",
       html: `
@@ -221,17 +217,17 @@ app.post("/api/brochure-lead", async (req, res) => {
     }
 
     await transporter.sendMail({
-      from: `"KJS Township Website" <${process.env.EMAIL}>`,
-      to: process.env.TO_EMAIL || process.env.EMAIL,
-      subject: "New Brochure Download Lead - KJS Township",
-      html: `
-        <h2>New Brochure Lead</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Phone:</b> ${phone}</p>
-        <p><b>Source:</b> Brochure Download</p>
-        <p><b>Date:</b> ${new Date().toLocaleString("en-IN")}</p>
-      `
-    });
+  from: `"KJS Township Website" <${process.env.SMTP_USER}>`,
+  to: process.env.TO_EMAIL,
+  subject: "New Brochure Download Lead - KJS Township",
+  html: `
+    <h2>New Brochure Lead</h2>
+    <p><b>Name:</b> ${name}</p>
+    <p><b>Phone:</b> ${phone}</p>
+    <p><b>Source:</b> Brochure Download</p>
+    <p><b>Date:</b> ${new Date().toLocaleString("en-IN")}</p>
+  `
+});
 
     res.json({
       success: true,
