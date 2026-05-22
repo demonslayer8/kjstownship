@@ -21,7 +21,7 @@
 
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
-
+<link rel="preload" as="image" href="img/project header.webp" fetchpriority="high">
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap">
   <!-- Tailwind -->
@@ -302,15 +302,15 @@
    <section class="relative min-h-[720px] flex items-center overflow-hidden">
 
   <!-- VIDEO -->
-  <video 
+ <video 
   autoplay 
   muted 
   loop 
   playsinline 
-  preload="none"
+  preload="metadata"
   poster="img/project header.webp"
-  
   class="absolute inset-0 w-full h-full object-cover">
+  
   <source src="https://res.cloudinary.com/dpp7gycdu/video/upload/q_auto,vc_auto/v1777287655/Banner_video_hub3aq.mp4" type="video/mp4">
 </video>
 
@@ -1001,6 +1001,23 @@ document.addEventListener("visibilitychange", function () {
     clearInterval(interval);
     document.title = originalTitle;
   }
+});
+</script>
+<script>
+window.addEventListener("load", function () {
+  setTimeout(function () {
+    var s = document.createElement("script");
+    s.src = "https://www.googletagmanager.com/gtag/js?id=G-32VG6L50X0";
+    s.async = true;
+    document.body.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+
+    gtag('js', new Date());
+    gtag('config', 'G-32VG6L50X0');
+  }, 2500);
 });
 </script>
 </body>
