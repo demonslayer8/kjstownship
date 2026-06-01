@@ -38,66 +38,105 @@
 
   <!-- Schema -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://www.kjstownship.com/#organization",
-        "name": "KJS Township",
-        "url": "https://www.kjstownship.com/",
-        "logo": "https://www.kjstownship.com/img/Fevicon.png",
-        "description": "KJS Township offers premium industrial plots near Delhi NCR for warehouse, factory, logistics, manufacturing and long-term investment use.",
-        "sameAs": [
-          "https://www.instagram.com/kjstownshipofficial/",
-          "https://www.facebook.com/profile.php?id=61572159641100"
-        ]
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.kjstownship.com/#organization",
+      "name": "KJS Township",
+      "url": "https://www.kjstownship.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.kjstownship.com/img/Fevicon.png"
       },
-      {
-        "@type": "WebSite",
-        "@id": "https://www.kjstownship.com/#website",
-        "url": "https://www.kjstownship.com/",
-        "name": "KJS Township",
-        "publisher": {
-          "@id": "https://www.kjstownship.com/#organization"
+      "description": "KJS Township offers premium industrial plots near Delhi NCR for warehouse, factory, logistics, manufacturing and long-term investment use.",
+      "sameAs": [
+        "https://www.instagram.com/kjstownshipofficial/",
+        "https://www.facebook.com/profile.php?id=61572159641100"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.kjstownship.com/#website",
+      "url": "https://www.kjstownship.com/",
+      "name": "KJS Township",
+      "publisher": {
+        "@id": "https://www.kjstownship.com/#organization"
+      },
+      "inLanguage": "en-IN"
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://www.kjstownship.com/#localbusiness",
+      "name": "KJS Township",
+      "url": "https://www.kjstownship.com/",
+      "image": "https://www.kjstownship.com/img/logo.webp",
+      "description": "Premium industrial plots near Delhi NCR suitable for warehouse, factory, logistics and business expansion.",
+      "areaServed": [
+        "Delhi NCR",
+        "Jhajjar",
+        "Bahadurgarh",
+        "Haryana"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "Haryana",
+        "addressCountry": "IN"
+      },
+      "priceRange": "Contact for pricing"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.kjstownship.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.kjstownship.com/"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.kjstownship.com/#navigation",
+      "itemListElement": [
+        {
+          "@type": "SiteNavigationElement",
+          "position": 1,
+          "name": "Home",
+          "url": "https://www.kjstownship.com/"
         },
-        "inLanguage": "en-IN"
-      },
-      {
-        "@type": "LocalBusiness",
-        "@id": "https://www.kjstownship.com/#localbusiness",
-        "name": "KJS Township",
-        "url": "https://www.kjstownship.com/",
-        "image": "https://www.kjstownship.com/img/logo.webp",
-        "description": "Premium industrial plots near Delhi NCR suitable for warehouse, factory, logistics and business expansion.",
-        "areaServed": [
-          "Delhi NCR",
-          "Jhajjar",
-          "Bahadurgarh",
-          "Haryana"
-        ],
-        "address": {
-          "@type": "PostalAddress",
-          "addressRegion": "Haryana",
-          "addressCountry": "IN"
+        {
+          "@type": "SiteNavigationElement",
+          "position": 2,
+          "name": "About Us",
+          "url": "https://www.kjstownship.com/aboutus.html"
         },
-        "priceRange": "Contact for pricing"
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://www.kjstownship.com/#breadcrumb",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://www.kjstownship.com/"
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+        {
+          "@type": "SiteNavigationElement",
+          "position": 3,
+          "name": "Projects",
+          "url": "https://www.kjstownship.com/project.html"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 4,
+          "name": "Blog",
+          "url": "https://www.kjstownship.com/blog.html"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 5,
+          "name": "Contact Us",
+          "url": "https://www.kjstownship.com/contact.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
 
   <script id="tailwind.config.js">
     tailwind.config = {
@@ -202,6 +241,7 @@
       transform: translateY(0) scale(1);
     }
   </style>
+  
 </head>
 <body>
 <main>
