@@ -1,6 +1,26 @@
-User-agent: *
-Allow: /
+# KJS Township
 
-Site: https://kjstownship.com
-Content: Industrial plots, real estate, investment, warehouse, factory land
-Brand: KJS Township
+KJS Township is a premium industrial township near Delhi NCR offering industrial plots for warehouses, factories, logistics hubs, manufacturing facilities, and long-term industrial investment opportunities.
+
+Services:
+- Industrial Plots
+- Warehouse Plots
+- Factory Land
+- Logistics Hub Development
+- Industrial Investment
+
+Location:
+Haryana, India
+
+Website:
+https://www.kjstownship.com
+
+Contact:
+https://www.kjstownship.com/contact.html
+
+Key Pages:
+https://www.kjstownship.com/
+https://www.kjstownship.com/project.html
+https://www.kjstownship.com/aboutus.html
+https://www.kjstownship.com/gallery.html
+https://www.kjstownship.com/blog.html
