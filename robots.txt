@@ -5,4 +5,7 @@ Disallow: /admin/
 Disallow: /private/
 Disallow: /.env/
 
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
 Sitemap: https://www.kjstownship.com/sitemap.xml
+
