@@ -1,5 +1,5 @@
 https://kjstownship.com/* https://www.kjstownship.com/:splat 301!
-http://kjstownship.com/* https://www.kjstownship.com/:splat 301!
+http://kjstownhip.com/* https://www.kjstownship.com/:splat 301!
 http://www.kjstownship.com/* https://www.kjstownship.com/:splat 301!
 
 /Blog/investmentblog.html /blog/investmentblog.html 301
@@ -9,8 +9,6 @@ http://www.kjstownship.com/* https://www.kjstownship.com/:splat 301!
 /Blog/featureblog.html /blog/featureblog.html 301
 /Blog/Infrastructureblog.html /blog/infrastructureblog.html 301
 /Blog/markettrandsblog.html /blog/markettrandsblog.html 301
-
-/blog/Infrastructureblog.html /blog/infrastructureblog.html 301
 
 /Blog/investmentblog /blog/investmentblog.html 301
 /Blog/warehouseblog /blog/warehouseblog.html 301
