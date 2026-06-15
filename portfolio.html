@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alok Kumar — Digital Growth Strategist</title>
+  <meta name="description" content="Advanced Digital Marketing & Growth Strategy" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --bg-dark: #070b15;
+      --bg-secondary: #0f1419;
+      --accent-1: #00ffa3;
+      --accent-2: #ff006e;
+      --accent-3: #8338ec;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a8b8;
+      --border: rgba(255, 255, 255, 0.05);
+    }
+
+    body {
+      font-family: 'Instrument Serif', serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(0deg, transparent 24%, rgba(0, 255, 163, 0.02) 25%, rgba(0, 255, 163, 0.02) 26%, transparent 27%, transparent 74%, rgba(0, 255, 163, 0.02) 75%, rgba(0, 255, 163, 0.02) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(0, 255, 163, 0.02) 25%, rgba(0, 255, 163, 0.02) 26%, transparent 27%, transparent 74%, rgba(0, 255, 163, 0.02) 75%, rgba(0, 255, 163, 0.02) 76%, transparent 77%, transparent);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      width: min(1400px, 96%);
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ============ HEADER ============ */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      background: rgba(7, 11, 21, 0.7);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(7, 11, 21, 0.95);
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0, 255, 163, 0.1);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--accent-1);
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .logo::before {
+      content: '$ ';
+      opacity: 0.5;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .nav-item {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-family: 'JetBrains Mono', monospace;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item::before {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      transition: width 0.3s ease;
+    }
+
+    .nav-item:hover {
+      color: var(--accent-1);
+    }
+
+    .nav-item:hover::before {
+      width: 100%;
+    }
+
+    .mode-toggle {
+      width: 40px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    /* ============ HERO ============ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 0 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 1000px;
+      height: 1000px;
+      background: radial-gradient(circle, rgba(0, 255, 163, 0.12) 0%, transparent 70%);
+      filter: blur(100px);
+      bottom: -200px;
+      right: -300px;
+      animation: moveRight 15s ease-in-out infinite;
+    }
+
+    @keyframes moveRight {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      50% { transform: translateX(50px) translateY(-50px); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: center;
+    }
+
+    .hero-text {
+      position: relative;
+    }
+
+    .hero-text::before {
+      content: '> WELCOME';
+      position: absolute;
+      top: -40px;
+      left: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent-1);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(56px, 8vw, 88px);
+      line-height: 1.1;
+      margin: 40px 0 30px;
+      font-weight: 400;
+      letter-spacing: -2px;
+    }
+
+    h1 .gradient-text {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 50px;
+      max-width: 500px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn-hero {
+      padding: 14px 36px;
+      border: 1px solid var(--accent-1);
+      background: transparent;
+      color: var(--accent-1);
+      border-radius: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--accent-1);
+      z-index: -1;
+      transition: left 0.3s ease;
+    }
+
+    .btn-hero:hover::before {
+      left: 0;
+    }
+
+    .btn-hero:hover {
+      color: var(--bg-dark);
+    }
+
+    .scroll-indicator {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .scroll-indicator::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 30px;
+      background: var(--accent-1);
+      margin-top: 10px;
+      animation: scroll-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-pulse {
+      0%, 100% { opacity: 1; height: 30px; }
+      50% { opacity: 0.3; height: 15px; }
+    }
+
+    /* Hero right - advanced card */
+    .hero-visual {
+      position: relative;
+      height: 500px;
+    }
+
+    .floating-element {
+      position: absolute;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.02);
+      padding: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      transition: all 0.4s ease;
+    }
+
+    .element-1 {
+      width: 280px;
+      top: 0;
+      left: 0;
+      animation: float-1 6s ease-in-out infinite;
+    }
+
+    .element-2 {
+      width: 240px;
+      top: 120px;
+      right: 0;
+      animation: float-2 8s ease-in-out infinite;
+    }
+
+    .element-3 {
+      width: 260px;
+      bottom: 0;
+      left: 40px;
+      animation: float-3 7s ease-in-out infinite;
+    }
+
+    @keyframes float-1 {
+      0%, 100% { transform: translateY(0) rotateZ(-2deg); }
+      50% { transform: translateY(-30px) rotateZ(2deg); }
+    }
+
+    @keyframes float-2 {
+      0%, 100% { transform: translateY(0) rotateZ(2deg); }
+      50% { transform: translateY(40px) rotateZ(-2deg); }
+    }
+
+    @keyframes float-3 {
+      0%, 100% { transform: translateY(0) rotateZ(1deg); }
+      50% { transform: translateY(-25px) rotateZ(-1deg); }
+    }
+
+    .element-label {
+      color: var(--accent-1);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .element-stat {
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    .element-stat strong {
+      color: var(--accent-2);
+      font-family: 'Instrument Serif', serif;
+      font-size: 16px;
+    }
+
+    /* ============ SECTIONS ============ */
+    section {
+      padding: 160px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-1), transparent);
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 80px;
+      margin-bottom: 100px;
+      align-items: start;
+    }
+
+    .section-header h2 {
+      font-size: clamp(42px, 7vw, 68px);
+      line-height: 1.15;
+      font-weight: 400;
+      letter-spacing: -1px;
+    }
+
+    .section-header-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent-1);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      line-height: 1;
+    }
+
+    .section-header p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ============ ABOUT SECTION ============ */
+    #about {
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 255, 163, 0.03) 50%, transparent 100%);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-left {
+      position: relative;
+    }
+
+    .about-left::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      top: 20px;
+      left: 20px;
+      z-index: -1;
+    }
+
+    .about-content {
+      border: 1px solid var(--border);
+      padding: 50px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.01);
+      backdrop-filter: blur(10px);
+    }
+
+    .about-content h3 {
+      font-size: 14px;
+      color: var(--accent-1);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .about-content p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+
+    .about-content strong {
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+
+    .about-right {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .stat-box {
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .stat-box:hover {
+      border-color: var(--accent-1);
+      background: rgba(0, 255, 163, 0.05);
+    }
+
+    .stat-box:hover::before {
+      opacity: 1;
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--accent-1);
+      margin-bottom: 8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ============ SERVICES - UNIQUE LAYOUT ============ */
+    #services {
+      background: linear-gradient(180deg, transparent 0%, rgba(255, 0, 110, 0.02) 100%);
+    }
+
+    .services-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-item {
+      padding: 40px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(0, 255, 163, 0.05), rgba(255, 0, 110, 0.02));
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-item::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(0, 255, 163, 0.2), transparent);
+      border-radius: 50%;
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    .service-item:hover::before {
+      opacity: 1;
+      top: 50%;
+      right: 20%;
+    }
+
+    .service-item:hover {
+      border-color: var(--accent-1);
+      transform: translateY(-8px);
+    }
+
+    .service-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 32px;
+      color: var(--accent-1);
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .service-item h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      line-height: 1.3;
+    }
+
+    .service-item p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ============ PORTFOLIO - MASONRY STYLE ============ */
+    #portfolio {
+      background: linear-gradient(180deg, transparent 0%, rgba(131, 56, 236, 0.02) 100%);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .portfolio-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 320px;
+    }
+
+    .portfolio-card:nth-child(2) {
+      grid-row: span 2;
+      min-height: auto;
+    }
+
+    .portfolio-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent-1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .portfolio-card:hover::before {
+      opacity: 1;
+    }
+
+    .portfolio-card:hover {
+      border-color: var(--accent-1);
+      transform: translateY(-8px);
+    }
+
+    .portfolio-header {
+      padding: 30px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .portfolio-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--accent-2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .portfolio-card h3 {
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .portfolio-body {
+      padding: 30px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .portfolio-card p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      flex-grow: 1;
+      margin-bottom: 20px;
+    }
+
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent-1);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      border: 1px solid var(--accent-1);
+      padding: 10px 18px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      width: fit-content;
+    }
+
+    .portfolio-link:hover {
+      background: var(--accent-1);
+      color: var(--bg-dark);
+    }
+
+    /* ============ CTA SECTION ============ */
+    #cta {
+      background: linear-gradient(180deg, rgba(0, 255, 163, 0.05) 0%, transparent 100%);
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-wrapper {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 80px;
+      background: linear-gradient(135deg, rgba(0, 255, 163, 0.08), rgba(255, 0, 110, 0.05));
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-wrapper::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 255, 163, 0.1), transparent);
+      filter: blur(80px);
+      top: -200px;
+      right: -200px;
+      pointer-events: none;
+    }
+
+    .cta-wrapper > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-wrapper h2 {
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 1.1;
+      margin-bottom: 30px;
+      font-weight: 400;
+      letter-spacing: -1px;
+    }
+
+    .cta-wrapper p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 50px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn-primary {
+      padding: 16px 48px;
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      border: none;
+      color: var(--bg-dark);
+      border-radius: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 255, 163, 0.3);
+    }
+
+    .cta-btn-secondary {
+      padding: 16px 48px;
+      border: 1px solid var(--accent-1);
+      background: transparent;
+      color: var(--accent-1);
+      border-radius: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn-secondary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--accent-1);
+      z-index: -1;
+      transition: left 0.3s ease;
+    }
+
+    .cta-btn-secondary:hover::before {
+      left: 0;
+    }
+
+    .cta-btn-secondary:hover {
+      color: var(--bg-dark);
+    }
+
+    /* ============ FOOTER ============ */
+    footer {
+      padding: 50px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-secondary);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 1200px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .services-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .portfolio-card:nth-child(2) {
+        grid-row: span 1;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        gap: 30px;
+      }
+
+      .nav-item {
+        display: none;
+      }
+
+      .hero {
+        padding: 100px 0 40px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn-hero {
+        width: 100%;
+        text-align: center;
+      }
+
+      section {
+        padding: 100px 0;
+      }
+
+      .section-header {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-wrapper {
+        padding: 50px;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .cta-btn-primary,
+      .cta-btn-secondary {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 13px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .section-header h2 {
+        font-size: 28px;
+      }
+
+      .about-content,
+      .service-item,
+      .portfolio-card {
+        padding: 20px;
+      }
+
+      .floating-element {
+        display: none;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo">AK</div>
+        <nav class="nav-menu">
+          <a class="nav-item" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">About</a>
+          <a class="nav-item" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Services</a>
+          <a class="nav-item" onclick="document.getElementById('portfolio').scrollIntoView({behavior: 'smooth'})">Work</a>
+          <a class="nav-item" onclick="document.getElementById('cta').scrollIntoView({behavior: 'smooth'})">Connect</a>
+          <div class="mode-toggle"></div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>
+            Growth <span class="gradient-text">Architecture</span> For Modern Brands
+          </h1>
+          <p class="hero-desc">
+            Strategic digital marketing, conversion-engineered websites, and data-obsessed campaigns that turn market opportunity into sustainable revenue growth.
+          </p>
+          <div class="hero-actions">
+            <button class="btn-hero" onclick="document.getElementById('cta').scrollIntoView({behavior: 'smooth'})">
+              Start Project
+            </button>
+            <span class="scroll-indicator">Explore</span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="floating-element element-1">
+            <div class="element-label">> metrics</div>
+            <div class="element-stat">
+              <strong>2+</strong> years<br>
+              scaling brands
+            </div>
+          </div>
+          <div class="floating-element element-2">
+            <div class="element-label">> status</div>
+            <div class="element-stat">
+              <strong>6+</strong> successful<br>
+              campaigns
+            </div>
+          </div>
+          <div class="floating-element element-3">
+            <div class="element-label">> mission</div>
+            <div class="element-stat">
+              <strong>100%</strong> growth<br>
+              obsessed
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="section-header-tag">/ introduction</div>
+          <h2>Who I Am</h2>
+        </div>
+        <p>
+          I architect digital growth systems for brands that dare to scale. By fusing strategic marketing intelligence with technical expertise, I engineer revenue-moving campaigns and conversion-obsessed digital experiences.
+        </p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-left">
+          <div class="about-content">
+            <h3>Core Philosophy</h3>
+            <p>
+              Growth isn't luck—it's <strong>engineering</strong>. Every campaign, every website, every strategy is built with obsessive attention to conversion metrics and user behavior.
+            </p>
+            <p>
+              I combine <strong>strategic marketing mastery</strong> with <strong>technical precision</strong> to create digital ecosystems that don't just attract attention—they convert it into revenue.
+            </p>
+            <p>
+              From real estate to jewelry, healthcare to industrial services—I've scaled diverse businesses through integrated digital strategies.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-right">
+          <div class="stat-box">
+            <div class="stat-number">2+</div>
+            <div class="stat-label">Years of Strategic Growth</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">6+</div>
+            <div class="stat-label">Winning Campaign Executions</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Dedicated to Growth Outcomes</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Revenue Potential Unlocked</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="section-header-tag">/ expertise</div>
+          <h2>Services</h2>
+        </div>
+        <p>
+          Complete digital growth architecture for brands ready to scale. From strategy to execution, I handle every lever that moves revenue.
+        </p>
+      </div>
+
+      <div class="services-wrapper">
+        <div class="service-item">
+          <div class="service-number">01</div>
+          <h3>Digital Marketing Strategy</h3>
+          <p>Comprehensive market analysis, positioning strategy, campaign architecture, and growth roadmap design that scales with your ambition.</p>
+        </div>
+
+        <div class="service-item">
+          <div class="service-number">02</div>
+          <h3>Paid Advertising</h3>
+          <p>Google Ads & Meta mastery. Advanced targeting, audience segmentation, budget optimization, and ROI engineering that turns ad spend into revenue.</p>
+        </div>
+
+        <div class="service-item">
+          <div class="service-number">03</div>
+          <h3>Web Development</h3>
+          <p>Conversion-focused websites, landing page architecture, responsive design excellence, and technical implementation using modern standards.</p>
+        </div>
+
+        <div class="service-item">
+          <div class="service-number">04</div>
+          <h3>Lead Generation Systems</h3>
+          <p>Pipeline architecture, funnel optimization, qualification frameworks, real-time lead routing, and WhatsApp conversion automation.</p>
+        </div>
+
+        <div class="service-item">
+          <div class="service-number">05</div>
+          <h3>Content Engineering</h3>
+          <p>Persuasive copywriting, SEO content architecture, social media strategy, email sequences, and brand messaging frameworks.</p>
+        </div>
+
+        <div class="service-item">
+          <div class="service-number">06</div>
+          <h3>Real Estate Marketing</h3>
+          <p>Property positioning, buyer/seller matching, market launch campaigns, competitive analysis, and residential/commercial promotion.</p>
+        </div>
+      </div>
+    </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <div class="section-header-tag">/ portfolio</div>
+          <h2>Recent Work</h2>
+        </div>
+        <p>
+          Campaigns and websites that generated measurable business impact. Each project engineered for specific growth objectives.
+        </p>
+      </div>
+
+      <div class="portfolio-grid">
+        <div class="portfolio-card">
+          <div class="portfolio-header">
+            <div class="portfolio-tag">Real Estate</div>
+            <h3>KJS Township</h3>
+          </div>
+          <div class="portfolio-body">
+            <p>Industrial real estate platform. Engineered comprehensive digital transformation including lead gen optimization and market positioning.</p>
+            <a href="https://www.kjstownship.com" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+              Explore →
+            </a>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-header">
+            <div class="portfolio-tag">Strategy</div>
+            <h3>UrgentSales.in</h3>
+          </div>
+          <div class="portfolio-body">
+            <p>Property marketplace built on advanced lead gen. Architected seller/buyer matching system and growth campaigns connecting thousands.</p>
+            <a href="https://www.urgentsales.in" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+              Explore →
+            </a>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-header">
+            <div class="portfolio-tag">Brand</div>
+            <h3>Eraya Style</h3>
+          </div>
+          <div class="portfolio-body">
+            <p>Premium jewelry brand. Elevated market positioning and executed brand marketing that drove online conversion and customer lifetime value.</p>
+            <a href="https://erayastyle.com/" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+              Explore →
+            </a>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-header">
+            <div class="portfolio-tag">Healthcare</div>
+            <h3>Soniva Dental</h3>
+          </div>
+          <div class="portfolio-body">
+            <p>Dental clinic growth. Built digital presence, patient acquisition system, and reputation architecture that 3x'd monthly bookings.</p>
+            <a href="https://www.sonivadental.com" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+              Explore →
+            </a>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-header">
+            <div class="portfolio-tag">Multi-Brand</div>
+            <h3>Leenus India</h3>
+          </div>
+          <div class="portfolio-body">
+            <p>Multi-category business. Orchestrated brand visibility, integrated marketing campaigns, and market expansion strategy.</p>
+            <a href="https://leenusindia.com/" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+              Explore →
+            </a>
+          </div>
+        </div>
+
+        <div class="portfolio-card">
+          <div class="portfolio-header">
+            <div class="portfolio-tag">B2B</div>
+            <h3>MV Jindal Elevators</h3>
+          </div>
+          <div class="portfolio-body">
+            <p>Industrial services. Architected B2B lead gen system, content strategy, and commercial market positioning for service expansion.</p>
+            <a href="https://www.mvjindalelevators.com" target="_blank" rel="noopener noreferrer" class="portfolio-link">
+              Explore →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="container">
+      <div class="cta-wrapper">
+        <h2>Ready to Engineer Growth?</h2>
+        <p>
+          Let's architect your next growth chapter. Whether scaling revenue, building digital presence, or optimizing conversion systems—I'm here to engineer results.
+        </p>
+        <div class="cta-buttons">
+          <a href="mailto:aalokkumarroy12@gmail.com">
+            <button class="cta-btn-primary">Email Me</button>
+          </a>
+          <a href="https://wa.me/918271015745" target="_blank" rel="noopener noreferrer">
+            <button class="cta-btn-secondary">WhatsApp</button>
+          </a>
+          <a href="https://demonslayer8.github.io/newreposetory/" target="_blank" rel="noopener noreferrer">
+            <button class="cta-btn-secondary">More Work</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Alok Kumar — Digital Growth Architect & Strategy Engineer</p>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && document.querySelector(href)) {
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.service-item, .portfolio-card, .stat-box').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s ease-out';
+      observer.observe(el);
+    });
+
+    // Tech aesthetic terminal effect
+    const logo = document.querySelector('.logo');
+    logo.addEventListener('click', function() {
+      console.log('%c Growth Engineering System v2.0', 'color: #00ffa3; font-size: 16px; font-weight: bold;');
+      console.log('%c Ready to scale | alok@growth.dev', 'color: #a0a8b8; font-size: 12px;');
+    });
+  </script>
+
+</body>
+</html>
